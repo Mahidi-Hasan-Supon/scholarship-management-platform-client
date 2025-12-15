@@ -1,24 +1,35 @@
 import React from "react";
+import { CiLocationOn } from "react-icons/ci";
+import { MdCategory } from "react-icons/md";
+import { Link } from "react-router";
 
-const Card = () => {
-
+const Card = ({scholarship}) => {
+  const {scholarshipName , universityImage , scholarshipCategory , location , applicationFees} = scholarship
   return (
     <div>
       <div className="card bg-base-100 w-96 shadow-sm">
-        <figure>
+        <figure className="">
           <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+            src={universityImage} className="w-[500px] object-cover h-[300px]"
             alt="Shoes"
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">Card Title</h2>
-          <p>
-            A card component has a figure, a body part, and inside body there
-            are title and actions parts
-          </p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+          <h2 className="card-title text-xl">{scholarshipName}</h2>
+           <div className="flex justify-between font-bold">
+              <p className="flex items-center gap-2">
+               <CiLocationOn /> {location}
+              </p>
+              <p >
+                  ${applicationFees }
+              </p>
+
+           </div>
+           <p className="flex items-center gap-2 font-bold">
+         <MdCategory />  { scholarshipCategory}
+           </p>
+          <div className="card-actions justify-center">
+            <Link className="btn btn-primary w-[full]">View Details</Link>
           </div>
         </div>
       </div>
