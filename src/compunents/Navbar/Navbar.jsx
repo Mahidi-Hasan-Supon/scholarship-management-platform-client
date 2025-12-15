@@ -6,10 +6,10 @@ const Navbar = () => {
     <>
       <div className="flex">
         <li>
-          <NavLink>Home</NavLink>
+          <NavLink to='/'>Home</NavLink>
         </li>
         <li>
-          <NavLink>All Scholarships</NavLink>
+          <NavLink to='/allScholarship'>All Scholarships</NavLink>
         </li>
       </div>
     </>
