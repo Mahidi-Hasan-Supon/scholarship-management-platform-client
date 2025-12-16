@@ -29,7 +29,7 @@ const Card = ({scholarship}) => {
          <MdCategory />  { scholarshipCategory}
            </p>
           <div className="card-actions justify-center">
-            <Link to={`/cardDetails/${scholarship._id}`} className="btn btn-primary w-[full]">View Details</Link>
+            <Link to={`/cardDetails/${scholarship._id}`} className="btn btn-primary w-full">View Details</Link>
           </div>
         </div>
       </div>
