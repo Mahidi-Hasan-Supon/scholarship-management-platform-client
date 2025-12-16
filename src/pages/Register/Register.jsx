@@ -1,21 +1,43 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../useHook/useAuth";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import SocialLinks from "../../compunents/SocialLinks/SocialLinks";
+import axios from "axios";
 
 const Register = () => {
-  const { user, createUserWithEmailAndPasswordFunc } = useAuth();
+  const navigate = useNavigate()
+  const { user, createUserWithEmailAndPasswordFunc , updateProfileFunc } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const handleRegister = (data) => {
-    console.log(data.photo[0]);
+    const profileImg = data.photo[0];
+  console.log(profileImg);
     createUserWithEmailAndPasswordFunc(data.email, data.password)
       .then((res) => {
         console.log(res.user);
+        const fromData = new FormData();
+        fromData.append("image", profileImg);
+        const image_url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key}`
+        axios.post(image_url , fromData)
+       .then(res=>{
+          const photoUrl = res.data.data.url;
+          // update profile
+          const userProfile = {
+            email : data.email,
+            displayName: data.name,
+             photoURL: photoUrl
+          }
+          updateProfileFunc(userProfile)
+          .then(()=>{
+            console.log('profile picture done')
+            navigate(location?.state || '/')
+          })
+          .catch(error => console.log(error))
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -71,9 +93,9 @@ const Register = () => {
                 <p className="ml-15">Or</p>
                 <p className="border-t border-gray-200"></p>
               </div>
-             <p className="flex items-center justify-center w-full">
-               <SocialLinks></SocialLinks>
-             </p>
+              <p className="flex items-center justify-center w-full">
+                <SocialLinks></SocialLinks>
+              </p>
               <p>
                 Already have an account?Please{" "}
                 <Link className="text-red-500" to="/login">
