@@ -20,24 +20,24 @@ const CardDetails = () => {
   }, [id]);
   return (
     <div className="py-10">
-      <div className="card card-side bg-base-100 w-2xl mx-auto shadow-sm">
+      <div className="card card-side bg-base-100 md:w-2xl mx-auto shadow-sm">
         <figure>
-          <img src={scholarship.universityImage} alt="Movie" />
+          <img src={scholarship.universityImage} className="w-[1200px] object-cover" alt="Movie" />
         </figure>
 
         <div className="card-body">
           <h1 className="text-3xl font-bold">{scholarship.scholarshipName}</h1>
           <p className="text-gray-600">
             {" "}
-            University Rank: {scholarship.universityWorldRank}{" "}
+            University Rank: <span className=" font-semibold">{scholarship.universityWorldRank}</span> {" "}
           </p>{" "}
-          <p>Deadline: {scholarship.applicationDeadline}</p>{" "}
-          <p>Location: {scholarship.location}</p>{" "}
-          <p>Application Fee: ${scholarship.applicationFees}</p>{" "}
-          <h2 className="mt-4 font-semibold">Description</h2>{" "}
-          <p>{scholarship.description}</p>{" "}
-          <h2 className="mt-4 font-semibold">Coverage / Stipend</h2>{" "}
-          <p>{scholarship.stipend}</p>
+          <p>Deadline: <span className=" font-semibold">{scholarship.applicationDeadline}</span></p>{" "}
+          <p>Location: <span className=" font-semibold">{scholarship.location}</span> </p>{" "}
+          <p>Application Fee: <span className=" font-semibold">${scholarship.applicationFees}</span> </p>{" "}
+          <h2 className="mt-4 ">Description</h2>{" "}
+          <p><span className=" font-semibold">{scholarship.description}</span> </p>{" "}
+          <h2 className="mt-4 ">Coverage / Stipend</h2>{" "}
+          <p className=" font-semibold">{scholarship.coverage}</p>
           <div className="card-actions justify-center">
             <button className="btn btn-primary w-full">
               Apply for Scholarship

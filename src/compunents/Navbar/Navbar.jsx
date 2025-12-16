@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router";
+import useAuth from "../../useHook/useAuth";
 
 const Navbar = () => {
+  const { user, signOutFunc } = useAuth();
+  const [open, setOpen] = useState(false);
+  const handleSignOut = () => {
+    signOutFunc()
+      .then(() => {
+        console.log("signout");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const links = (
     <>
       <div className="flex">
         <li>
-          <NavLink to='/'>Home</NavLink>
+          <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to='/allScholarship'>All Scholarships</NavLink>
+          <NavLink to="/allScholarship">All Scholarships</NavLink>
         </li>
       </div>
     </>
@@ -39,19 +51,49 @@ const Navbar = () => {
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-           {links}
+            {links}
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-        {links}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <Link to='/register' className="btn">Register</Link>
-        <Link to='/login' className="btn">Login</Link>
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <img
+              src={user.photoURL}
+              tabIndex={0}
+              role="button"
+              className="w-[40px] h-[40px] rounded-2xl"
+              alt=""
+            />
+            <ul
+              tabIndex="-1"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li>
+                <Link>Dashboard</Link>
+              </li>
+            
+           <button onClick={handleSignOut} className="btn btn-secondary">
+           SignOut
+          </button >
+            </ul>
+          </div>
+        ) : (
+          <>
+            <div className="gap-2">
+              <Link to="/register" className="btn">
+                Register
+              </Link>
+              <Link to="/login" className="btn">
+                Login
+              </Link>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
