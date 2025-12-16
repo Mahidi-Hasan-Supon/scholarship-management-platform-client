@@ -20,7 +20,7 @@ const Card = ({scholarship}) => {
               <p className="flex items-center gap-2">
                <CiLocationOn /> {location}
               </p>
-              <p >
+              <p>
                   ${applicationFees }
               </p>
 
@@ -29,7 +29,7 @@ const Card = ({scholarship}) => {
          <MdCategory />  { scholarshipCategory}
            </p>
           <div className="card-actions justify-center">
-            <Link className="btn btn-primary w-[full]">View Details</Link>
+            <Link to={`/cardDetails/${scholarship._id}`} className="btn btn-primary w-[full]">View Details</Link>
           </div>
         </div>
       </div>
