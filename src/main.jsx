@@ -12,6 +12,7 @@ import Login from './pages/Login/Login.jsx';
 import AuthProvider from './compunents/context/AuthProvider.jsx';
 import AllScholarship from './pages/AllScholarship/AllScholarship.jsx';
 import CardDetails from './pages/cardDetails/CardDetails.jsx';
+import Dashboard from './layout/Dashboard.jsx';
 // import AuthProvider from '../compunents/context/AuthProvider';
 
 
@@ -44,6 +45,15 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path:'/dashboard',
+    Component:Dashboard,
+    children:[
+      {
+        
+      }
+    ]
+  }
 ]);
 
 

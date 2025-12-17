@@ -74,7 +74,7 @@ const Navbar = () => {
               className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
             >
               <li>
-                <Link>Dashboard</Link>
+                <Link to='/dashboard'>Dashboard</Link>
               </li>
             
            <button onClick={handleSignOut} className="btn btn-secondary">
@@ -88,7 +88,7 @@ const Navbar = () => {
               <Link to="/register" className="btn">
                 Register
               </Link>
-              <Link to="/login" className="btn">
+              <Link to="/login" className="btn mx-2">
                 Login
               </Link>
             </div>
