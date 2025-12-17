@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { MdCategory } from "react-icons/md";
 import { Link } from "react-router";
 
 const Card = ({scholarship}) => {
   const {scholarshipName , universityImage , scholarshipCategory , location , applicationFees} = scholarship
+  
   return (
     <div>
       <div className="card bg-base-100 w-96 shadow-sm">

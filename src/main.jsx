@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       {
        path:'/allScholarship',
        Component:AllScholarship,
-       loader:()=>fetch('http://localhost:5000/scholarship')
+      //  loader:()=>fetch('http://localhost:5000/scholarship')
       },
       {
         path:'/cardDetails/:id',
