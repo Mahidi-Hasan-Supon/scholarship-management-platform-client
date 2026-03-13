@@ -5,7 +5,7 @@ import useAuth from "../../useHook/useAuth";
 import SocialLinks from "../../compunents/SocialLinks/SocialLinks";
 
 const Login = () => {
-    const {signInWithEmailAndPasswordFunc} = useAuth()
+  const { signInWithEmailAndPasswordFunc } = useAuth();
   const {
     register,
     handleSubmit,
@@ -13,13 +13,13 @@ const Login = () => {
   } = useForm();
   const handleLogin = (data) => {
     console.log(data);
-    signInWithEmailAndPasswordFunc(data.email , data.password)
-    .then(res=>{
+    signInWithEmailAndPasswordFunc(data.email, data.password)
+      .then((res) => {
         console.log(res.user);
-    })
-    .catch(err=>{
+      })
+      .catch((err) => {
         console.log(err);
-    })
+      });
   };
   return (
     <div className="py-20">
@@ -39,26 +39,29 @@ const Login = () => {
                 type="password"
                 {...register("password", {
                   required: true,
-                //   pattern:
-                //     /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/,
+                  //   pattern:
+                  //     /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/,
                 })}
                 className="input"
                 placeholder="Password"
               />
               <button className="btn btn-neutral mt-4">Student Login</button>
-              <div className="flex items-center "> 
+              <div className="flex items-center ">
                 <p className="border-t border-gray-200"></p>
                 <p className="ml-15">Or</p>
                 <p className="border-t border-gray-200"></p>
               </div>
-                <p className="flex items-center justify-center w-full">
-               <SocialLinks></SocialLinks>
-             </p>
-               <p>You are new this website?Please  <Link className="text-red-500" to='/register'>Register</Link></p>
+              <p className=" w-full">
+                <SocialLinks></SocialLinks>
+              </p>
+              <p>
+                You are new this website?Please{" "}
+                <Link className="text-red-500" to="/register">
+                  Register
+                </Link>
+              </p>
             </fieldset>
-           
           </div>
-            
         </form>
       </div>
     </div>

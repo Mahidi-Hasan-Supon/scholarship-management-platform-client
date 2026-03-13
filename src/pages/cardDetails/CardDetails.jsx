@@ -5,37 +5,62 @@ const CardDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [scholarship, setScholarship] = useState({});
-  const [reviews, setReviews] = useState([]);
+  // const [reviews, setReviews] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:5000/scholarship/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setScholarship(data);
       });
-    fetch(`http://localhost:5000/reviews/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data);
-      });
+    // reviews section
+    // fetch(`http://localhost:5000/reviews/${id}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setReviews(data);
+    //   });
   }, [id]);
   return (
     <div className="py-10">
       <div className="card card-side bg-base-100 md:w-2xl mx-auto shadow-sm">
         <figure>
-          <img src={scholarship.universityImage} className="w-[1200px] object-cover" alt="Movie" />
+          <img
+            src={scholarship.universityImage}
+            className="w-[1200px] object-cover"
+            alt="Movie"
+          />
         </figure>
 
-        <div className="card-body">
+        <div className="card-body ">
           <h1 className="text-3xl font-bold">{scholarship.scholarshipName}</h1>
           <p className="text-gray-600">
             {" "}
-            University Rank: <span className=" font-semibold">{scholarship.universityWorldRank}</span> {" "}
+            University Rank:{" "}
+            <span className=" font-semibold">
+              {scholarship.universityWorldRank}
+            </span>{" "}
           </p>{" "}
-          <p>Deadline: <span className=" font-semibold">{scholarship.applicationDeadline}</span></p>{" "}
-          <p>Location: <span className=" font-semibold">{scholarship.location}</span> </p>{" "}
-          <p>Application Fee: <span className=" font-semibold">${scholarship.applicationFees}</span> </p>{" "}
+          <p>
+            Deadline:{" "}
+            <span className=" font-semibold">
+              {scholarship.applicationDeadline}
+            </span>
+          </p>{" "}
+          <p>
+            Location:{" "}
+            <span className=" font-semibold">{scholarship.location}</span>{" "}
+          </p>{" "}
+          <p>
+            Application Fee:{" "}
+            <span className=" font-semibold">
+              ${scholarship.applicationFees}
+            </span>{" "}
+          </p>{" "}
           <h2 className="mt-4 ">Description</h2>{" "}
-          <p><span className=" font-semibold">{scholarship.description}</span> </p>{" "}
+          <p>
+            <span className=" font-semibold">
+              {scholarship.description}
+            </span>{" "}
+          </p>{" "}
           <h2 className="mt-4 ">Coverage / Stipend</h2>{" "}
           <p className=" font-semibold">{scholarship.coverage}</p>
           <div className="card-actions justify-center">
@@ -47,7 +72,7 @@ const CardDetails = () => {
       </div>
       {/* Reviews Section */}
       <h2 className="mt-10 text-2xl font-bold">Reviews</h2>
-      <div className="space-y-4 mt-4">
+      {/* <div className="space-y-4 mt-4">
         {reviews.map((review) => (
           <div key={review._id} className="border p-4 rounded-xl">
             <div className="flex items-center gap-3">
@@ -61,7 +86,7 @@ const CardDetails = () => {
             <p>{review.comment}</p>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

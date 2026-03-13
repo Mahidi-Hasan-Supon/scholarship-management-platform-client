@@ -18,6 +18,7 @@ import MyApplications from "./Sidebar/MyApplications.jsx";
 import ManageApplications from "./Sidebar/ManageApplications.jsx";
 import AdminRoutes from "./routes/AdminRoutes.jsx";
 import ModeratorRoute from "./routes/ModeratorRoute.jsx";
+import Loading from "./compunents/Loading/Loading.jsx";
 
 const router = createBrowserRouter([
   {
@@ -88,16 +89,16 @@ const router = createBrowserRouter([
       //   ),
       // },
 
-      // // ✅ Moderator routes
-      // {
-      //   path: "applications",
-      //   element: (
+      // ✅ Moderator routes
+      {
+        path: "applications",
+        element: (
 
-      //     <ModeratorRoute>
-      //       <ManageApplications />
-      //     </ModeratorRoute>
-      //   ),
-      // },
+          <ModeratorRoute>
+            <ManageApplications />
+          </ModeratorRoute>
+        ),
+      },
       // {
       //   path: "reviews",
       //   element: (

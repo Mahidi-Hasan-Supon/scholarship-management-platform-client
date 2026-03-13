@@ -14,7 +14,7 @@ const SocialLinks = () => {
   return (
     <div>
       {/* Google */}
-      <button onClick={handleLinks} className="btn bg-white text-black border-[#e5e5e5]">
+      <button onClick={handleLinks} className="btn w-full bg-white text-black border-[#e5e5e5]">
         <svg
           aria-label="Google logo"
           width="16"

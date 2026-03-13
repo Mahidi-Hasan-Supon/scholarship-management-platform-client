@@ -93,7 +93,7 @@ const Register = () => {
                 <p className="ml-15">Or</p>
                 <p className="border-t border-gray-200"></p>
               </div>
-              <p className="flex items-center justify-center w-full">
+              <p className="w-full">
                 <SocialLinks></SocialLinks>
               </p>
               <p>
