@@ -14,11 +14,11 @@ const AllScholarship = () => {
         setScholarships(data.result);
         setTotalCount(data.count);
         const page = Math.ceil(totalCount / limit);
-        console.log(page);
+        // console.log(page);
         setTotalPage(page);
       });
   }, [totalPage, totalCount , currentPage]);
-  console.log(scholarships);
+  // console.log(scholarships);
   return (
     <div className="py-10">
       <h1 className="text-5xl font-bold md:text-center">All Scholarship</h1>

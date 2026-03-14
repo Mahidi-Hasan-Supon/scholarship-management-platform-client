@@ -1,11 +1,14 @@
 import React from "react";
-import scholarship from '../../assets/SCHL_Logo_FULL_White.svg'
+import scholarship from "../../assets/SCHL_Logo_FULL_White.svg";
 const Footer = () => {
   return (
     <div className="mt-10">
       <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
-     
-            <img src={scholarship} alt="" className="text-black bg-blue-600/70  w-[200px] h-[100px]"/>
+        <img
+          src={scholarship}
+          alt=""
+          className="text-black bg-blue-600/70  w-[200px] h-[100px]"
+        />
 
         <nav className="grid grid-flow-col gap-4">
           <a className="link link-hover">About us</a>
@@ -15,7 +18,10 @@ const Footer = () => {
         </nav>
         <nav>
           <div className="grid grid-flow-col gap-4">
-            <a href="https://www.linkedin.com/in/mahidi-hasan-supon/" target="linkedin">
+            <a
+              href="https://www.linkedin.com/in/mahidi-hasan-supon/"
+              target="linkedin"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

@@ -19,6 +19,8 @@ import ManageApplications from "./Sidebar/ManageApplications.jsx";
 import AdminRoutes from "./routes/AdminRoutes.jsx";
 import ModeratorRoute from "./routes/ModeratorRoute.jsx";
 import Loading from "./compunents/Loading/Loading.jsx";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const router = createBrowserRouter([
   {
@@ -90,15 +92,15 @@ const router = createBrowserRouter([
       // },
 
       // ✅ Moderator routes
-      {
-        path: "applications",
-        element: (
+      // {
+      //   path: "applications",
+      //   element: (
 
-          <ModeratorRoute>
-            <ManageApplications />
-          </ModeratorRoute>
-        ),
-      },
+      //     <ModeratorRoute>
+      //       <ManageApplications />
+      //     </ModeratorRoute>
+      //   ),
+      // },
       // {
       //   path: "reviews",
       //   element: (
@@ -109,10 +111,10 @@ const router = createBrowserRouter([
       // },
 
       // ✅ Student routes
-      {
-        path: "my-applications",
-        element: <MyApplications />,
-      },
+      // {
+      //   path: "my-applications",
+      //   element: <MyApplications />,
+      // },
       // {
       //   path: "my-reviews",
       //   element: <MyReviews />,
@@ -121,10 +123,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+   <div>
+
+  <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <RouterProvider router={router} />,
     </AuthProvider>
-  </StrictMode>
+      <ReactQueryDevtools initialIsOpen={false} />
+     </QueryClientProvider>
+   </div>
+
 );
