@@ -6,8 +6,9 @@ import SocialLinks from "../../compunents/SocialLinks/SocialLinks";
 import axios from "axios";
 
 const Register = () => {
-  const navigate = useNavigate()
-  const { user, createUserWithEmailAndPasswordFunc , updateProfileFunc } = useAuth();
+  const navigate = useNavigate();
+  const { user, createUserWithEmailAndPasswordFunc, updateProfileFunc } =
+    useAuth();
   const {
     register,
     handleSubmit,
@@ -15,29 +16,28 @@ const Register = () => {
   } = useForm();
   const handleRegister = (data) => {
     const profileImg = data.photo[0];
-  console.log(profileImg);
+    console.log(profileImg);
     createUserWithEmailAndPasswordFunc(data.email, data.password)
       .then((res) => {
         console.log(res.user);
         const fromData = new FormData();
         fromData.append("image", profileImg);
-        const image_url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key}`
-        axios.post(image_url , fromData)
-       .then(res=>{
+        const image_url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key}`;
+        axios.post(image_url, fromData).then((res) => {
           const photoUrl = res.data.data.url;
           // update profile
           const userProfile = {
-            email : data.email,
+            email: data.email,
             displayName: data.name,
-             photoURL: photoUrl
-          }
+            photoURL: photoUrl,
+          };
           updateProfileFunc(userProfile)
-          .then(()=>{
-            console.log('profile picture done')
-            navigate(location?.state || '/')
-          })
-          .catch(error => console.log(error))
-        })
+            .then(() => {
+              console.log("profile picture done");
+              navigate(location?.state || "/");
+            })
+            .catch((error) => console.log(error));
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -93,9 +93,9 @@ const Register = () => {
                 <p className="ml-15">Or</p>
                 <p className="border-t border-gray-200"></p>
               </div>
-              <p className="w-full">
+              <div className="w-full">
                 <SocialLinks></SocialLinks>
-              </p>
+              </div>
               <p>
                 Already have an account?Please{" "}
                 <Link className="text-red-500" to="/login">

@@ -51,9 +51,9 @@ const Login = () => {
                 <p className="ml-15">Or</p>
                 <p className="border-t border-gray-200"></p>
               </div>
-              <p className=" w-full">
+              <div className="w-full">
                 <SocialLinks></SocialLinks>
-              </p>
+              </div>
               <p>
                 You are new this website?Please{" "}
                 <Link className="text-red-500" to="/register">
