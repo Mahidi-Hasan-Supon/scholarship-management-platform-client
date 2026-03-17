@@ -3,8 +3,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Loading from "../../compunents/Loading/Loading";
+import useAuth from "../../useHook/useAuth";
 
 const CardDetails = () => {
+  const {user} = useAuth()
   // const [reviews, setReviews] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -62,6 +64,11 @@ const CardDetails = () => {
       applicationFees,
       description,
       universityName,
+      studentInfo:{
+        name:user?.displayName,
+        email:user?.email, 
+        photoURL:user?.photoURL
+      }
     };
     const result = await axios.post(
         `${import.meta.env.VITE_SERVER_SITE}/create-checkout-session`,paymentInfo

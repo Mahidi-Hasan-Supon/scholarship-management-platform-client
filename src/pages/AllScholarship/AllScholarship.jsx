@@ -8,7 +8,7 @@ const AllScholarship = () => {
   const [currentPage , setCurrentPage] = useState(0)
   const limit = 5;
   useEffect(() => {
-    fetch(`http://localhost:5000/scholarship?limit=${limit}&skip=${currentPage * limit}`)
+    fetch(`${import.meta.env.VITE_SERVER_SITE}/scholarship?limit=${limit}&skip=${currentPage * limit}`)
       .then((res) => res.json())
       .then((data) => {
         setScholarships(data.result);
