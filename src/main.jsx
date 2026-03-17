@@ -21,6 +21,7 @@ import ModeratorRoute from "./routes/ModeratorRoute.jsx";
 import Loading from "./compunents/Loading/Loading.jsx";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import SuccessPayment from "./payment/SuccessPayment.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/cardDetails/:id",
         Component: CardDetails,
+      },
+      {
+        path: "/success-payment",
+        Component: SuccessPayment,
       },
       {
         path: "/register",

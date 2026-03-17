@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Loading from "../../compunents/Loading/Loading";
 import useAuth from "../../useHook/useAuth";
+import { number } from "framer-motion";
 
 const CardDetails = () => {
   const {user} = useAuth()
@@ -61,7 +62,7 @@ const CardDetails = () => {
       applicationDeadline,
       location,
       coverage,
-      applicationFees,
+      applicationFee:Number(applicationFees),
       description,
       universityName,
       studentInfo:{
@@ -70,10 +71,11 @@ const CardDetails = () => {
         photoURL:user?.photoURL
       }
     };
-    const result = await axios.post(
+    const {data} = await axios.post(
         `${import.meta.env.VITE_SERVER_SITE}/create-checkout-session`,paymentInfo
       )
-      console.log(result);
+      window.location.href=data.url
+      // console.log(data.url);
   };
 
   return (
