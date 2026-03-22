@@ -24,12 +24,12 @@ const Sidebar = () => {
           >
             My Profile
           </Link>
-          <Link
+          {/* <Link
             className="block hover:bg-indigo-600 p-2 rounded"
             to="/dashboard/add-scholarship"
           >
             Add Scholarship
-          </Link>
+          </Link> */}
           <Link
             className="block hover:bg-indigo-600 p-2 rounded"
             to="/dashboard/manage-users"

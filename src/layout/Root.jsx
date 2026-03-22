@@ -6,7 +6,7 @@ import useAuth from '../useHook/useAuth';
 import Loading from '../compunents/Loading/Loading';
 
 const Root = () => {
-    const {loading} = useAuth()
+    // const {loading} = useAuth()
     return (
         <div className='md:w-7xl mx-auto'>
             <Navbar></Navbar>

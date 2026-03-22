@@ -13,15 +13,17 @@ import AuthProvider from "./compunents/context/AuthProvider.jsx";
 import AllScholarship from "./pages/AllScholarship/AllScholarship.jsx";
 import CardDetails from "./pages/cardDetails/CardDetails.jsx";
 import Dashboard from "./layout/Dashboard.jsx";
-import AddScholarship from "./Sidebar/AddScholarship.jsx";
-import MyApplications from "./Sidebar/MyApplications.jsx";
-import ManageApplications from "./Sidebar/ManageApplications.jsx";
-import AdminRoutes from "./routes/AdminRoutes.jsx";
-import ModeratorRoute from "./routes/ModeratorRoute.jsx";
+
+// import MyApplications from "./Sidebar/MyApplications.js";
+// import ManageApplications from "./Sidebar/ManageApplications.jsx";
+// import AdminRoutes from "./routes/AdminRoutes.jsx";
+// import ModeratorRoute from "./routes/ModeratorRoute.jsx";
 import Loading from "./compunents/Loading/Loading.jsx";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import SuccessPayment from "./payment/SuccessPayment.jsx";
+import AddScholarship from "./Dashboard/AddScholarship.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -59,85 +61,24 @@ const router = createBrowserRouter([
     path: "/dashboard",
     Component: Dashboard,
     children: [
-      // { index: true, element: <MyProfile /> },
 
-      // ✅ Admin routes
       {
         path: "add-scholarship",
-        element: (
-          // <AddScholarship />
-          <AdminRoutes>
-            <AddScholarship />
-          </AdminRoutes>
-        ),
+        element: <AddScholarship></AddScholarship>,
       },
-      // {
-      //   path: "manage-scholarship",
-      //   element: (
-      //     <AdminRoutes>
-      //       <ManageScholarship />
-      //     </AdminRoutes>
-      //   ),
-      // },
-      // {
-      //   path: "manage-users",
-      //   element: (
-      //     <AdminRoutes>
-      //       <ManageUsers />
-      //     </AdminRoutes>
-      //   ),
-      // },
-      // {
-      //   path: "analytics",
-      //   element: (
-      //     <AdminRoutes>
-      //       <Analytics />
-      //     </AdminRoutes>
-      //   ),
-      // },
-
-      // ✅ Moderator routes
-      // {
-      //   path: "applications",
-      //   element: (
-
-      //     <ModeratorRoute>
-      //       <ManageApplications />
-      //     </ModeratorRoute>
-      //   ),
-      // },
-      // {
-      //   path: "reviews",
-      //   element: (
-      //     <ModeratorRoute>
-      //       <AllReviews />
-      //     </ModeratorRoute>
-      //   ),
-      // },
-
-      // ✅ Student routes
-      // {
-      //   path: "my-applications",
-      //   element: <MyApplications />,
-      // },
-      // {
-      //   path: "my-reviews",
-      //   element: <MyReviews />,
-      // },
+     
     ],
   },
 ]);
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
-   <div>
-
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <RouterProvider router={router} />,
-    </AuthProvider>
+  <div>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />,
+      </AuthProvider>
       <ReactQueryDevtools initialIsOpen={false} />
-     </QueryClientProvider>
-   </div>
-
+    </QueryClientProvider>
+  </div>,
 );
