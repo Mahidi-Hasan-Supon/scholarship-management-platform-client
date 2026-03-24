@@ -23,6 +23,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import SuccessPayment from "./payment/SuccessPayment.jsx";
 import AddScholarship from "./Dashboard/AddScholarship.jsx";
+import Profile from "./Dashboard/Profile.jsx";
 
 
 const router = createBrowserRouter([
@@ -61,12 +62,14 @@ const router = createBrowserRouter([
     path: "/dashboard",
     Component: Dashboard,
     children: [
-
       {
         path: "add-scholarship",
         element: <AddScholarship></AddScholarship>,
       },
-     
+      {
+        path: "profile",
+        element: <Profile></Profile>,
+      },
     ],
   },
 ]);

@@ -98,7 +98,7 @@ const DashboardLayout = () => {
             </li>
             {/* profile */}
             <li>
-              <Link to="/dashboard/add-scholarship">
+              <Link to="/dashboard/profile">
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="add-scholarship"
