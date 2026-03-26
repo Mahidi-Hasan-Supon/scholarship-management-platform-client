@@ -14,4 +14,9 @@ export const imageUpload = async ImageDAta=>{
 }
 
 
+// user er data save db
+export const saveOrUploadUser = async userData =>{
+  const {data} = await axios.post(`${import.meta.env.VITE_SERVER_SITE}/user`, userData)
+  return data
+}
 

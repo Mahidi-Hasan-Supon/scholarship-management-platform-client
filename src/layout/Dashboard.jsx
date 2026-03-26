@@ -1,7 +1,7 @@
 import { Link, NavLink, Outlet } from "react-router";
 import useAuth from "../useHook/useAuth";
 import { GoPerson, GoPersonFill } from "react-icons/go";
-import { FaCalendarPlus } from "react-icons/fa";
+import { FaCalendarPlus, FaUsers } from "react-icons/fa";
 const DashboardLayout = () => {
   const { role } = useAuth();
 
@@ -93,6 +93,30 @@ const DashboardLayout = () => {
                    <FaCalendarPlus ></FaCalendarPlus>
                   </svg>
                   <span className="is-drawer-close:hidden ml-5"> Add Scholarship</span>
+                </button>
+              </Link>
+            </li>
+            {/* ManageUsers */}
+            <li>
+              <Link to="/dashboard/manage-users">
+                <button
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="add-scholarship"
+                >
+                  {/* Home icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                    className="my-1.5 inline-block size-6"
+                  >
+                    <FaUsers></FaUsers>
+                  </svg>
+                  <span className="is-drawer-close:hidden ml-5">Manage Users</span>
                 </button>
               </Link>
             </li>

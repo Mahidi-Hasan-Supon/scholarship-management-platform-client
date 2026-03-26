@@ -24,6 +24,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import SuccessPayment from "./payment/SuccessPayment.jsx";
 import AddScholarship from "./Dashboard/AddScholarship.jsx";
 import Profile from "./Dashboard/Profile.jsx";
+import CancelledPayment from "./payment/CancelledPayment.jsx";
+import { ToastContainer } from "react-toastify";
+import ManageUsers from "./Dashboard/ManageUsers.jsx";
 
 
 const router = createBrowserRouter([
@@ -49,6 +52,10 @@ const router = createBrowserRouter([
         Component: SuccessPayment,
       },
       {
+        path: "/canceled-payment/:id",
+        Component: CancelledPayment,
+      },
+      {
         path: "/register",
         Component: Register,
       },
@@ -67,6 +74,10 @@ const router = createBrowserRouter([
         element: <AddScholarship></AddScholarship>,
       },
       {
+        path: "manage-users",
+        element: <ManageUsers></ManageUsers>,
+      },
+      {
         path: "profile",
         element: <Profile></Profile>,
       },
@@ -80,6 +91,17 @@ createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />,
+         <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       </AuthProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

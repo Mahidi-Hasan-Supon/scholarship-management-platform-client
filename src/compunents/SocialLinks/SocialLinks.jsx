@@ -1,20 +1,33 @@
 import React from "react";
 import useAuth from "../../useHook/useAuth";
+import { useNavigate } from "react-router";
+import { saveOrUploadUser } from "../../utils";
 const SocialLinks = () => {
-    const {signInWithPopupFunc} = useAuth()
-    const handleLinks=()=>{
-         signInWithPopupFunc()
-         .then(res=>{
-            console.log(res.user);
-         })
-          .catch(err=>{
-            console.log(err);
-          })
-    }
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { signInWithPopupFunc } = useAuth();
+  const handleLinks = () => {
+    signInWithPopupFunc()
+      .then(async (res) => {
+        console.log(res.user);
+        await saveOrUploadUser({
+          name: res.user?.name,
+          email: res.user?.email,
+          photo: res.user?.photoURL,
+        });
+        navigate(location?.state || "/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       {/* Google */}
-      <button onClick={handleLinks} className="btn w-full bg-white text-black border-[#e5e5e5]">
+      <button
+        onClick={handleLinks}
+        className="btn w-full bg-white text-black border-[#e5e5e5]"
+      >
         <svg
           aria-label="Google logo"
           width="16"

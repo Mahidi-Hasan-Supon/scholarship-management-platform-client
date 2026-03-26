@@ -1,10 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../useHook/useAuth";
 import SocialLinks from "../../compunents/SocialLinks/SocialLinks";
+import { saveOrUploadUser } from "../../utils";
 
 const Login = () => {
+  const navigate = useNavigate() 
+  const location = useLocation()
   const { signInWithEmailAndPasswordFunc } = useAuth();
   const {
     register,
@@ -14,8 +17,15 @@ const Login = () => {
   const handleLogin = (data) => {
     console.log(data);
     signInWithEmailAndPasswordFunc(data.email, data.password)
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.user);
+        await saveOrUploadUser({
+          name:res.user?.name,
+          email:res.user?.email,
+          photo:res.data?.photoURL
+        })
+        navigate('/')
+        navigate(location.state?location?.state : '/')
       })
       .catch((err) => {
         console.log(err);

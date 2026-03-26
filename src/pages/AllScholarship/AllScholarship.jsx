@@ -5,10 +5,12 @@ const AllScholarship = () => {
   const [scholarships, setScholarships] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
-  const [currentPage , setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0);
   const limit = 5;
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_SERVER_SITE}/scholarship?limit=${limit}&skip=${currentPage * limit}`)
+    fetch(
+      `${import.meta.env.VITE_SERVER_SITE}/scholarship?limit=${limit}&skip=${currentPage * limit}`,
+    )
       .then((res) => res.json())
       .then((data) => {
         setScholarships(data.result);
@@ -17,7 +19,7 @@ const AllScholarship = () => {
         // console.log(page);
         setTotalPage(page);
       });
-  }, [totalPage, totalCount , currentPage]);
+  }, [totalPage, totalCount, currentPage]);
   // console.log(scholarships);
   return (
     <div className="py-10">
@@ -28,23 +30,31 @@ const AllScholarship = () => {
         ))}
       </div>
       <div className="py-10 gap-5 items-center flex justify-center">
-        {
-          currentPage > 0 && 
-        <button className="btn btn-primary" onClick={()=>setCurrentPage(currentPage - 1)}>
-          pre
-        </button>
-        }
+        {currentPage > 0 && (
+          <button
+            className="btn btn-primary"
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            pre
+          </button>
+        )}
         {[...Array(totalPage).keys()].map((i) => (
-          <button onClick={()=>setCurrentPage(i)} className={`btn ${
-              i === currentPage && "btn-primary" 
-            }`} key={i}>{i}</button>
+          <button
+            onClick={() => setCurrentPage(i)}
+            className={`btn ${i === currentPage && "btn-primary"}`}
+            key={i}
+          >
+            {i}
+          </button>
         ))}
-          {
-          currentPage < totalPage - 1 && 
-        <button className="btn btn-primary" onClick={()=>setCurrentPage(currentPage + 1)}>
-          next
-        </button>
-        }
+        {currentPage < totalPage - 1 && (
+          <button
+            className="btn btn-primary"
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            next
+          </button>
+        )}
       </div>
     </div>
   );

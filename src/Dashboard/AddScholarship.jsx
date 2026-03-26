@@ -32,7 +32,7 @@ const AddScholarship = () => {
     onSuccess: (data) => {
       console.log(data);
       // toast
-      toast.success("Scholarship data added");
+      // toast.success("Scholarship data added");
       mutationReset();
       // query invalieds
     },
@@ -63,25 +63,26 @@ const AddScholarship = () => {
   const handleUpload = async (data) => {
     console.log(data);
     const {
-      city,
-      country,
+
       degree,
-      image,
-      photo,
+      universityImage,
       scholarshipName,
       // photo,
       scholarshipCategory,
       subjectCategory,
       tuitionFees,
       universityName,
-      wordRank,
+      universityWorldRank,
+      universityCountry,
+      universityCity,
+
     } = data;
-    if (!photo || photo.length === 0) {
+    if (!universityImage || universityImage.length === 0) {
       toast.error("Please upload image");
       return;
     }
 
-    const imageFile = photo[0];
+    const imageFile = universityImage[0];
     // const formdata = new FormData();
     // formdata.append("image", imageFile);
     // const {imageData} = await axios.post(
@@ -92,17 +93,18 @@ const AddScholarship = () => {
     const photoURL = await imageUpload(imageFile);
     await updateProfileFunc(scholarshipName, photoURL);
     const scholarshipData = {
-      city,
-      country,
+      universityCountry,
+      universityCity,
+      // country,
       degree,
-      image: photoURL,
+      universityImage: photoURL,
       scholarshipName,
       // photo,
       scholarshipCategory,
       subjectCategory,
       tuitionFees:Number(tuitionFees),
       universityName,
-      wordRank,
+      universityWorldRank,
       // price: Number(price),
     };
     console.table(scholarshipData);
@@ -147,8 +149,8 @@ const AddScholarship = () => {
         {/* image */}
         <input
           type="file"
-          name="photo"
-          {...register("photo", { required: true })}
+          name="universityImage"
+          {...register("universityImage", { required: true })}
           placeholder="photo"
           className=" w-full file-input"
         />
@@ -161,11 +163,11 @@ const AddScholarship = () => {
           className="input input-bordered w-full"
         /> */}
         <select
-          {...register("country", { required: true })}
+          {...register("universityCountry", { required: true })}
           className="select select-bordered w-full"
           onChange={(e) => setSelectedCountry(e.target.value)}
         >
-          <option value="">Select Country</option>
+          <option value="">Select university country</option>
           {Object.keys(countryCityData).map((country) => (
             <option key={country} value={country}>
               {country}
@@ -175,10 +177,10 @@ const AddScholarship = () => {
         {/* city */}
         <select
           defaultValue="Select city"
-          {...register("city", { required: true })}
+          {...register("universityCity", { required: true })}
           className="select w-full select-md"
         >
-          <option value="">Select city</option>
+          <option value="">Select university city</option>
           {selectedCountry &&
             countryCityData[selectedCountry].map((city) => (
               <option key={city} value={city}>
@@ -194,7 +196,7 @@ const AddScholarship = () => {
           className="input input-bordered w-full"
         /> */}
         <select
-          {...register("wordRank", { required: true })}
+          {...register("universityWorldRank", { required: true })}
           defaultValue="Select World Rank"
           className="select w-full select-md"
         >
@@ -269,7 +271,6 @@ const AddScholarship = () => {
           Add Scholarship
         </button>
       </form>
-      <ToastContainer></ToastContainer>
     </div>
   );
 };

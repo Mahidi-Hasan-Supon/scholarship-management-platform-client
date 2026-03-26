@@ -4,6 +4,7 @@ import useAuth from "../../useHook/useAuth";
 import { Link, useNavigate } from "react-router";
 import SocialLinks from "../../compunents/SocialLinks/SocialLinks";
 import axios from "axios";
+import { saveOrUploadUser } from "../../utils";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -32,8 +33,13 @@ const Register = () => {
             photoURL: photoUrl,
           };
           updateProfileFunc(userProfile)
-            .then(() => {
+            .then(async () => {
               console.log("profile picture done");
+              await saveOrUploadUser({
+                  name: data.name,
+                  email: data.email,
+                  photo:data.photoURL,
+              })
               navigate(location?.state || "/");
             })
             .catch((error) => console.log(error));

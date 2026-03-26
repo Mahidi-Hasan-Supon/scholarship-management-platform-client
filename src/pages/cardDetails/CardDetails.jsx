@@ -7,7 +7,7 @@ import useAuth from "../../useHook/useAuth";
 import { number } from "framer-motion";
 
 const CardDetails = () => {
-  const {user} = useAuth()
+  const { user } = useAuth();
   // const [reviews, setReviews] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -31,11 +31,12 @@ const CardDetails = () => {
     universityImage,
     scholarshipName,
     universityWorldRank,
-    applicationDeadline,
-    location,
-    coverage,
-    applicationFees,
-    description,
+    universityCountry,
+    universityCity,
+    tuitionFees,
+    degree,
+    subjectCategory,
+    scholarshipCategory,
     universityName,
   } = scholarship || {};
   if (isLoading) return <Loading></Loading>;
@@ -59,37 +60,36 @@ const CardDetails = () => {
       universityImage,
       scholarshipName,
       universityWorldRank,
-      applicationDeadline,
       location,
-      coverage,
-      applicationFee:Number(applicationFees),
-      description,
+      tuitionFees,
       universityName,
-      studentInfo:{
-        name:user?.displayName,
-        email:user?.email, 
-        photoURL:user?.photoURL
-      }
+      universityCountry,
+      studentInfo: {
+        name: user?.displayName,
+        email: user?.email,
+        photoURL: user?.photoURL,
+      },
     };
-    const {data} = await axios.post(
-        `${import.meta.env.VITE_SERVER_SITE}/create-checkout-session`,paymentInfo
-      )
-      window.location.href=data.url
-      // console.log(data.url);
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_SERVER_SITE}/create-checkout-session`,
+      paymentInfo,
+    );
+    window.location.href = data.url;
+    // console.log(data.url);
   };
 
   return (
     <div className="py-10">
-      <div className="card card-side bg-base-100 md:w-2xl mx-auto shadow-sm">
+      <div className="card card-side bg-base-100 md:w-3xl mx-auto shadow-sm">
         <figure>
           <img
             src={universityImage}
-            className="w-[1200px] object-cover"
+            className="w-[800px] object-cover"
             alt="Movie"
           />
         </figure>
 
-        <div className="card-body ">
+        <div className="card-body p-2 m-2">
           <h1 className="text-3xl font-bold">{scholarshipName}</h1>
           <p className="text-gray-600">
             {" "}
@@ -97,26 +97,40 @@ const CardDetails = () => {
             <span className=" font-semibold">{universityWorldRank}</span>{" "}
           </p>{" "}
           <p>
-            Deadline:{" "}
-            <span className=" font-semibold">{applicationDeadline}</span>
+            University Name:{" "}
+            <span className=" font-semibold">{universityName}</span>
           </p>{" "}
           <p>
-            Location: <span className=" font-semibold">{location}</span>{" "}
+            Subject category:{" "}
+            <span className=" font-semibold">{subjectCategory} </span>{" "}
           </p>{" "}
           <p>
-            Application Fee:{" "}
-            <span className=" font-semibold">${applicationFees}</span>{" "}
+            Scholarship category:{" "}
+            <span className=" font-semibold">{scholarshipCategory} </span>{" "}
           </p>{" "}
-          <h2 className="mt-4 ">Description</h2>{" "}
           <p>
-            <span className=" font-semibold">{description}</span>{" "}
+            Tuition Fee:{" "}
+            <span className=" font-semibold">${tuitionFees}</span>{" "}
           </p>{" "}
-          <h2 className="mt-4 ">Coverage / Stipend</h2>{" "}
-          <p className=" font-semibold">{coverage}</p>
+          <h2 className="mt-4 ">Degree:</h2>{" "}
+          <p>
+            <span className=" font-semibold">{degree}</span>{" "}
+          </p>{" "}
+          <h2 className="mt-4 ">Country & City:</h2>{" "}
+          <p className=" font-semibold">
+            {universityCountry} & {universityCity}
+          </p>
           <div className="card-actions justify-center">
-            <button onClick={handlePayment} className="btn btn-primary w-full">
-              Apply for Scholarship
-            </button>
+            {scholarship.paymentStatus === "paid" ? (
+              <span className="text-green-400">Paid</span>
+            ) : (
+              <button
+                onClick={handlePayment}
+                className="btn btn-primary w-full"
+              >
+                Apply for Scholarship
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -9,7 +9,9 @@ const Card = ({ scholarship }) => {
     universityImage,
     scholarshipCategory,
     location,
-    applicationFees,
+    universityCountry,
+    universityCity,
+    tuitionFees,
   } = scholarship;
 
   return (
@@ -26,9 +28,9 @@ const Card = ({ scholarship }) => {
           <h2 className="card-title text-xl">{scholarshipName}</h2>
           <div className="flex justify-between font-bold">
             <p className="flex items-center gap-2">
-              <CiLocationOn /> {location}
+              <CiLocationOn /> {universityCountry},{universityCity}
             </p>
-            <p>${applicationFees}</p>
+            <p>${tuitionFees}</p>
           </div>
           <p className="flex items-center gap-2 font-bold">
             <MdCategory /> {scholarshipCategory}
