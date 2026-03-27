@@ -4,13 +4,15 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { data } from "react-router";
 import Loading from "../compunents/Loading/Loading";
+import useAxiosSecure from "../useHook/useAxiosSecure";
 
 const ManageUsers = () => {
+  const axiosSecure= useAxiosSecure()
     const {user} = useAuth() 
     const {data:users=[] , isLoading} = useQuery({
         queryKey:['users' , user?.email],
         queryFn:async ()=>{
-            const result = await axios(`${import.meta.env.VITE_SERVER_SITE}/users/role/${user?.email}`,
+            const result = await axiosSecure(`/users`,
             )
             return result.data
         }
@@ -27,15 +29,16 @@ const ManageUsers = () => {
               <th>
                
               </th>
+              <th>Image</th>
               <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Email</th>
               <th>Role</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
 
+          {users.map((user)=>(
 
             <tr key={user?._id}>
               <th>
@@ -45,25 +48,23 @@ const ManageUsers = () => {
                 <div className="flex items-center gap-3">
                   <div className="avatar">
                     <div className="mask mask-squircle h-12 w-12">
-                      <img
+                      <img 
                         src={user?.photoURL}
                         alt="Avatar Tailwind CSS Component"
                       />
                     </div>
                   </div>
-                  <div>
-                    <div className="font-bold">{user?.name}</div>
-                  </div>
                 </div>
               </td>
               <td>
-               {user?.email}
+               {user?.name}
               </td>
-              <td>Purple</td>
+              <td>{user?.email}</td>
               <th>
                 <button className="btn btn-ghost btn-xs">details</button>
               </th>
             </tr>
+          ))}
            
           </tbody>
         
