@@ -27,6 +27,7 @@ import Profile from "./Dashboard/Profile.jsx";
 import CancelledPayment from "./payment/CancelledPayment.jsx";
 import { ToastContainer } from "react-toastify";
 import ManageUsers from "./Dashboard/ManageUsers.jsx";
+import MyApplications from "./Dashboard/MyApplications.jsx";
 
 
 const router = createBrowserRouter([
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "manage-users",
         element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "my-applications",
+        element: <MyApplications></MyApplications>,
       },
       {
         path: "profile",
