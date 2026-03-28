@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         Component: SuccessPayment,
       },
       {
-        path: "/canceled-payment/:id",
+        path: "/canceled-payment",
         Component: CancelledPayment,
       },
       {
