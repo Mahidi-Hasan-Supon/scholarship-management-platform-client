@@ -28,7 +28,7 @@ import CancelledPayment from "./payment/CancelledPayment.jsx";
 import { ToastContainer } from "react-toastify";
 import ManageUsers from "./Dashboard/ManageUsers.jsx";
 import MyApplications from "./Dashboard/MyApplications.jsx";
-
+import ManageScholarship from "./Dashboard/ManageScholarship.jsx";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +83,10 @@ const router = createBrowserRouter([
         element: <MyApplications></MyApplications>,
       },
       {
+        path: "manage-scholarship",
+        element: <ManageScholarship></ManageScholarship>,
+      },
+      {
         path: "profile",
         element: <Profile></Profile>,
       },
@@ -96,17 +100,17 @@ createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />,
-         <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </AuthProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

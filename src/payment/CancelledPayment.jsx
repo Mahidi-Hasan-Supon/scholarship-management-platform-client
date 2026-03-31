@@ -36,7 +36,9 @@ const CancelledPayment = () => {
           <Link to={`/cardDetails/${id}`}>
           <button className='btn btn-primary'>Try again</button>
           </Link> */}
-        <h2 className="mb-2 text-center text-3xl font-semibold text-amber-50 mb-5 mt-10 ">❌ Payment Failed</h2>
+        <h2 className="mb-2 text-center text-3xl font-semibold text-amber-50 mb-5 mt-10 ">
+          ❌ Payment Failed
+        </h2>
         <p className="my-2">Scholarship: {scholarshipName}</p>
         <p className="my-2 text-xl font-sans">Please try again.</p>
 

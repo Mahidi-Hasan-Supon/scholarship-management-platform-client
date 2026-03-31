@@ -36,9 +36,9 @@ const Register = () => {
             .then(async () => {
               console.log("profile picture done");
               await saveOrUploadUser({
-                  name: data.name,
-                  email: data.email,
-                  photo:data.photoURL,
+                  name:data.name,
+                  email:data.email,
+                  photo:photoUrl,
               })
               navigate(location?.state || "/");
             })

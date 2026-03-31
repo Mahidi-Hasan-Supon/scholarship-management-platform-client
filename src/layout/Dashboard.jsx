@@ -77,7 +77,7 @@ const DashboardLayout = () => {
               <Link to="/dashboard/add-scholarship">
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="add-scholarship"
+                  data-tip="Add-Scholarship"
                 >
                   {/* Home icon */}
                   <svg
@@ -101,7 +101,7 @@ const DashboardLayout = () => {
               <Link to="/dashboard/manage-users">
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="add-scholarship"
+                  data-tip="Manage-Users"
                 >
                   {/* Home icon */}
                   <svg
@@ -125,7 +125,7 @@ const DashboardLayout = () => {
               <Link to="/dashboard/my-applications">
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="my-applications"
+                  data-tip="My-Applications"
                 >
                   {/* Home icon */}
                   <svg
@@ -144,12 +144,36 @@ const DashboardLayout = () => {
                 </button>
               </Link>
             </li>
+            {/* manage application */}
+            <li>
+              <Link to="/dashboard/manage-scholarship">
+                <button
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Manage-Scholarship"
+                >
+                  {/* Home icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                    className="my-1.5 inline-block size-6"
+                  >
+                    <GoPersonFill></GoPersonFill>
+                  </svg>
+                  <span className="is-drawer-close:hidden ml-5">Manage Scholarship</span>
+                </button>
+              </Link>
+            </li>
             {/* profile */}
             <li>
               <Link to="/dashboard/profile">
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="add-scholarship"
+                  data-tip="Profile"
                 >
                   {/* Home icon */}
                   <svg

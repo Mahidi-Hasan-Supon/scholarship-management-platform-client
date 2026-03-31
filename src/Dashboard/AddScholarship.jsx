@@ -245,7 +245,7 @@ const AddScholarship = () => {
           <option value="">Select Degree</option>
           <option value="Bachelor">Bachelor</option>
           <option value="Masters">Masters</option>
-          <option value="PhD">PhD</option>
+          <option value="PhD">Diploma</option>
         </select>
 
         {/* tuition fees */}
