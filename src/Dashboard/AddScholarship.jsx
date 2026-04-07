@@ -63,20 +63,33 @@ const AddScholarship = () => {
   const handleUpload = async (data) => {
     console.log(data);
     const {
-
       degree,
       universityImage,
       scholarshipName,
       // photo,
       scholarshipCategory,
       subjectCategory,
-      tuitionFees,
+      applicationFees,
       universityName,
       universityWorldRank,
       universityCountry,
       universityCity,
-
+      serviceCharge,
+      deadline,
+      postDate,
+      userEmail,
     } = data;
+
+    // if (new Date(postDate) > new Date()) {
+    //   toast.error("Post date cannot be in the future");
+    //   return;
+    // }
+
+    // if (new Date(deadline) < new Date(postDate)) {
+    //   toast.error("Deadline must be after post date");
+    //   return;
+    // }
+
     if (!universityImage || universityImage.length === 0) {
       toast.error("Please upload image");
       return;
@@ -102,10 +115,13 @@ const AddScholarship = () => {
       // photo,
       scholarshipCategory,
       subjectCategory,
-      tuitionFees:Number(tuitionFees),
+      applicationFees: Number(applicationFees),
       universityName,
       universityWorldRank,
-      // price: Number(price),
+      serviceCharge: Number(serviceCharge),
+      deadline,
+      postDate,
+      userEmail,
     };
     console.table(scholarshipData);
     try {
@@ -257,16 +273,53 @@ const AddScholarship = () => {
         /> */}
         <select
           defaultValue=""
-          {...register("tuitionFees", { required: true })}
+          {...register("applicationFees", { required: true })}
           className="select w-full select-md"
         >
-          <option value="">Select Tuition Fees</option>
-          <option value="0">Free (Fully Funded)</option>
-          <option value="1000">Under $1000</option>
-          <option value="5000">Under $5000</option>
-          <option value="10000">Under $10000</option>
-          <option value="20000">Above $20000</option>
+          <option value="">Select Application Fees</option>
+          <option value="0">Free</option>
+          <option value="50">$50</option>
+          <option value="100">$100</option>
+          <option value="200">$200</option>
         </select>
+        {/*  */}
+        {/* Service Charge */}
+        <input
+          type="number"
+          {...register("serviceCharge", { required: true, min: 0 })}
+          placeholder="Service Charge ($)"
+          className="input input-bordered w-full"
+        />
+
+        {/* Deadline */}
+        {/* <input
+          type="date"
+          {...register("deadline", { required: true })}
+          className="input input-bordered w-full"
+        /> */}
+        <input
+          type="date"
+          min={new Date().toISOString().split("T")[0]}
+          {...register("deadline", { required: true })}
+          className="input input-bordered w-full"
+        />
+
+        {/* Post Date */}
+        <input
+          type="date"
+          defaultValue={new Date().toISOString().split("T")[0]}
+          {...register("postDate", { required: true })}
+          className="input input-bordered w-full"
+        />
+
+        {/* User Email (auto fill) */}
+        <input
+          type="email"
+          value={user?.email || ""}
+          readOnly
+          {...register("userEmail", { required: true })}
+          className="input input-bordered w-full"
+        />
         <button type="submit" className="btn btn-primary w-full">
           Add Scholarship
         </button>

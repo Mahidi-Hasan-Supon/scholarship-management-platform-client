@@ -69,7 +69,7 @@ const ManageScholarship = () => {
         subjectCategory: data.subjectCategory,
         scholarshipCategory: data.scholarshipCategory,
         degree: data.degree,
-        tuitionFees: Number(data.tuitionFees),
+        applicationFees: Number(data.applicationFees),
       };
       
       // যদি নতুন image দেয়
@@ -131,7 +131,7 @@ const ManageScholarship = () => {
               <th>Image</th>
               <th>Scholarship $ University Name</th>
               <th>City & Country</th>
-              <th>ScholarshipCategory & TuitionFees</th>
+              <th>ScholarshipCategory & applicationFees</th>
               <th>Degree</th>
               <th>Action</th>
             </tr>
@@ -155,7 +155,7 @@ const ManageScholarship = () => {
                   <div className="flex items-center gap-3">
                     <div>
                       <div className="font-bold">
-                        {scholarship.universityName}
+                        {scholarship.scholarshipName}
                       </div>
                       <div className="text-sm opacity-50">
                         {scholarship.universityName}
@@ -171,7 +171,7 @@ const ManageScholarship = () => {
                   </span> */}
                 </td>
                 <td>
-                  {scholarship.scholarshipCategory} & {scholarship.tuitionFees}
+                  {scholarship.scholarshipCategory} & {scholarship.applicationFees}
                 </td>
                 <td>{scholarship.degree}</td>
                 <th>
@@ -322,7 +322,7 @@ const ManageScholarship = () => {
               </select>
 
               <select
-                {...register("tuitionFees", { required: true })}
+                {...register("applicationFees", { required: true })}
                 className="select w-full select-md"
               >
                 {/* <option value="">Select Tuition Fees</option> */}

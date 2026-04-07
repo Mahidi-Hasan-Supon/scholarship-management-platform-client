@@ -29,6 +29,8 @@ import { ToastContainer } from "react-toastify";
 import ManageUsers from "./Dashboard/ManageUsers.jsx";
 import MyApplications from "./Dashboard/MyApplications.jsx";
 import ManageScholarship from "./Dashboard/ManageScholarship.jsx";
+import ManageAppliedApplications from "./Dashboard/ManageAppliedApplications.jsx";
+import AllReviews from "./Dashboard/AllReviews.jsx";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +87,14 @@ const router = createBrowserRouter([
       {
         path: "manage-scholarship",
         element: <ManageScholarship></ManageScholarship>,
+      },
+      {
+        path: "manage-applied-applications",
+        element: <ManageAppliedApplications></ManageAppliedApplications>,
+      },
+      {
+        path: "all-reviews",
+        element: <AllReviews></AllReviews>,
       },
       {
         path: "profile",

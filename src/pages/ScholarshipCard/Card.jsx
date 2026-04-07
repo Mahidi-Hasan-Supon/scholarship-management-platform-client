@@ -11,7 +11,7 @@ const Card = ({ scholarship }) => {
     location,
     universityCountry,
     universityCity,
-    tuitionFees,
+    applicationFees,
   } = scholarship;
 
   return (
@@ -30,7 +30,7 @@ const Card = ({ scholarship }) => {
             <p className="flex items-center gap-2">
               <CiLocationOn /> {universityCountry},{universityCity}
             </p>
-            <p>${tuitionFees}</p>
+            <p>${applicationFees}</p>
           </div>
           <p className="flex items-center gap-2 font-bold">
             <MdCategory /> {scholarshipCategory}

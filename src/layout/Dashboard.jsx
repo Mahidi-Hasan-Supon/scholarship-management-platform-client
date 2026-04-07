@@ -1,7 +1,8 @@
 import { Link, NavLink, Outlet } from "react-router";
 import useAuth from "../useHook/useAuth";
 import { GoPerson, GoPersonFill } from "react-icons/go";
-import { FaCalendarPlus, FaUsers } from "react-icons/fa";
+import { FaCalendarPlus, FaClipboardCheck, FaFileAlt, FaStar, FaTasks, FaUsers } from "react-icons/fa";
+import { PlusCircle, Users } from "lucide-react";
 const DashboardLayout = () => {
   const { role } = useAuth();
 
@@ -47,7 +48,7 @@ const DashboardLayout = () => {
         <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
           {/* Sidebar content here */}
           <ul className="menu w-full bg-green-200 grow">
-            {/* List item */}
+            {/* home item */}
             <li>
               <Link to="/">
                 <button
@@ -91,6 +92,7 @@ const DashboardLayout = () => {
                     className="my-1.5 inline-block size-6"
                   >
                    <FaCalendarPlus ></FaCalendarPlus>
+                   {/* <PlusCircle></PlusCircle> */}
                   </svg>
                   <span className="is-drawer-close:hidden ml-5"> Add Scholarship</span>
                 </button>
@@ -120,7 +122,7 @@ const DashboardLayout = () => {
                 </button>
               </Link>
             </li>
-            {/* profile */}
+            {/* my application */}
             <li>
               <Link to="/dashboard/my-applications">
                 <button
@@ -138,7 +140,7 @@ const DashboardLayout = () => {
                     stroke="currentColor"
                     className="my-1.5 inline-block size-6"
                   >
-                    <GoPersonFill></GoPersonFill>
+                    <FaFileAlt ></FaFileAlt>
                   </svg>
                   <span className="is-drawer-close:hidden ml-5">My Applications</span>
                 </button>
@@ -162,9 +164,57 @@ const DashboardLayout = () => {
                     stroke="currentColor"
                     className="my-1.5 inline-block size-6"
                   >
-                    <GoPersonFill></GoPersonFill>
+                    <FaTasks></FaTasks>
                   </svg>
                   <span className="is-drawer-close:hidden ml-5">Manage Scholarship</span>
+                </button>
+              </Link>
+            </li>
+            {/* manage applied application */}
+            <li>
+              <Link to="/dashboard/Manage-applied-applications">
+                <button
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="ManageAppliedApplications"
+                >
+                  {/* Home icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                    className="my-1.5 inline-block size-6"
+                  >
+                    <FaClipboardCheck></FaClipboardCheck>
+                  </svg>
+                  <span className="is-drawer-close:hidden ml-2">Manage Applied Applications</span>
+                </button>
+              </Link>
+            </li>
+            {/* all reviews */}
+            <li>
+              <Link to="/dashboard/all-reviews">
+                <button
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="AllReviews"
+                >
+                  {/* Home icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                    className="my-1.5 inline-block size-6"
+                  >
+                    <FaStar></FaStar>
+                  </svg>
+                  <span className="is-drawer-close:hidden ml-5">All Reviews</span>
                 </button>
               </Link>
             </li>
