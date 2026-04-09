@@ -82,7 +82,7 @@ const ManageAppliedApplications = () => {
               <th>Application Name</th>
               <th>Application Email</th>
               <th>University Name</th>
-              <th>Details</th>
+              <th>Details</th> 
               <th>Application Feedback</th>
               <th>Application Status</th>
               <th>Payment Status</th>

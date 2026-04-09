@@ -38,7 +38,7 @@ const CardDetails = () => {
       return result.data;
     },
   });
-  console.log(reviews);
+  // console.log(reviews);
 
   const {
     _id,

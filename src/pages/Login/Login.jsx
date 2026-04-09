@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../useHook/useAuth";
 import SocialLinks from "../../compunents/SocialLinks/SocialLinks";
 import { saveOrUploadUser } from "../../utils";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate() 
@@ -29,6 +30,7 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err);
+        toast.err('Error')
       });
   };
   return (

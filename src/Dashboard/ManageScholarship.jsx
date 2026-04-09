@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 
 const ManageScholarship = () => {
   const { register, handleSubmit, reset } = useForm();
+  const { user } = useAuth();
 
   const modalRef = useRef(null);
   const axiosSecure = useAxiosSecure();
@@ -25,7 +26,6 @@ const ManageScholarship = () => {
     Australia: ["Sydney", "Melbourne", "Brisbane"],
   };
 
-  const { user } = useAuth();
   const {
     data: manageScholarship = [],
     isLoading,
