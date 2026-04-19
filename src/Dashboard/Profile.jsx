@@ -1,8 +1,14 @@
 import React from "react";
 import useAuth from "../useHook/useAuth";
+import useRole from "../useHook/useRole";
+import Loading from "../compunents/Loading/Loading";
 
 const Profile = () => {
-    const {user} = useAuth()
+  const { user } = useAuth();
+  const [role, isRoleLoading] = useRole();
+  console.log(role, isRoleLoading);
+  if (isRoleLoading) return <Loading></Loading>;
+  if (!role) return <p>Role is no found</p>;
   return (
     <div>
       {/* <div className="border border-amber-200 h-[500px] w-[400px] md:w-[800px] mx-auto mt-10 rounded-3xl">
@@ -32,7 +38,7 @@ const Profile = () => {
 
             <div className="flex justify-between">
               <span className="text-black">Role:</span>
-              <span className="font-medium">{user?.role}</span>
+              <span className="font-medium">{role?.role}</span>
             </div>
 
             {/* <div className="flex justify-between">

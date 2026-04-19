@@ -6,15 +6,20 @@ import useAxiosSecure from "../useHook/useAxiosSecure";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const MyApplications = () => {
   const { register, handleSubmit, reset } = useForm();
   const detailsModalRef = useRef();
+  const reviewsModalRef = useRef();
   const editModalRef = useRef();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [defaultApplication, setDefaultApplication] = useState();
   const [selectedCountry, setSelectedCountry] = useState("");
+  // const [currentApplication, setCurrentApplication] = useState({});
+  const [review, setReview] = useState("");
+  const [ratings, setRatings] = useState(0);
   // console.log(defaultApplication);
   const countryCityData = {
     USA: ["New York", "Los Angeles", "Chicago"],
@@ -22,7 +27,11 @@ const MyApplications = () => {
     Canada: ["Toronto", "Vancouver", "Montreal"],
     Australia: ["Sydney", "Melbourne", "Brisbane"],
   };
-  const { data: applications = [], isLoading } = useQuery({
+  const {
+    data: applications = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["applications", user?.email],
     queryFn: async () => {
       const result = await axiosSecure.get(`/my-applications/${user?.email}`);
@@ -30,7 +39,17 @@ const MyApplications = () => {
     },
   });
   // console.log(applications);
+  // console.log(defaultApplication);
+  // eta sudu handlereview er vitor comment kore ast if condition er jonno kora kinto amra backend e kore felsi er try catch diye toast diye si already reviewed
+  const { data: reviews = [], refetch: reviewRefetch } = useQuery({
+    queryKey: ["reviews", defaultApplication?._id],
+    queryFn: async () => {
+      const result = await axiosSecure(`/reviews/${defaultApplication?._id}`);
+      return result.data;
+    },
+  });
   if (isLoading) return <Loading></Loading>;
+
   // details modal
   const handleDetailsModal = (applications) => {
     setDefaultApplication(applications);
@@ -73,6 +92,72 @@ const MyApplications = () => {
       }
     } catch (err) {
       console.log(err);
+    }
+  };
+  // delete
+  const handleDelete = (id) => {
+    // console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed)
+        axiosSecure.delete(`/my-applications/${id}`).then((res) => {
+          // console.log(res.data);
+          if (res.data) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your applications has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+    });
+  };
+  // update
+  const handleReviewsModal = () => {
+    reviewsModalRef.current.showModal();
+  };
+  const handleReviewCloseModal = () => {
+    reviewsModalRef.current.close();
+  };
+  const handleReview = async () => {
+    // const alreadyReviewed = reviews.find((r) => r.userEmail === user?.email);
+    // if (alreadyReviewed) {
+    //   return toast.error("Already reviewed");
+    // }
+
+    // console.log(defaultApplication);
+    const reviewData = {
+      scholarshipId: defaultApplication?.scholarshipId,
+      universityName: defaultApplication.universityName,
+      scholarshipName: defaultApplication.scholarshipName,
+      userName: user?.displayName,
+      userEmail: user?.email,
+      userImage: user?.photoURL,
+      ratings,
+      review,
+      reviewDate: new Date(),
+    };
+    // console.log(reviewData);
+    try {
+      const res = await axiosSecure.post(`/reviews`, reviewData);
+      // console.log(res);
+      if (!res.data.insertedId) {
+        toast.success("Already reviewed");
+        return;
+      }
+      toast.success("Add review");
+      reviewRefetch();
+    } catch (err) {
+      console.log(err);
+      toast.error("Already reviewed");
     }
   };
   return (
@@ -131,10 +216,23 @@ const MyApplications = () => {
                         </Link>
                       )}
                     {application.applicationStatus === "pending" && (
-                      <button className="m-2 btn">Delete</button>
+                      <button
+                        onClick={() => handleDelete(application._id)}
+                        className="m-2 btn"
+                      >
+                        Delete
+                      </button>
                     )}
                     {application.applicationStatus === "completed" && (
-                      <button className="btn m-2">Add Reviews</button>
+                      <button
+                        onClick={() => {
+                          handleReviewsModal();
+                          setDefaultApplication(application);
+                        }}
+                        className="btn m-2"
+                      >
+                        Add Reviews
+                      </button>
                     )}
                   </div>
                 </td>
@@ -389,6 +487,57 @@ const MyApplications = () => {
                               <button className="btn">Close</button>
                             </form>
                           </div> */}
+          </div>
+        </dialog>
+        {/* reviews */}
+        <dialog ref={reviewsModalRef} className="modal">
+          <div className="modal-box">
+            <h3 className="font-bold mb-2 text-lg text-center">
+              Applications Reviews!
+            </h3>
+            <div className="grid grid-cols-1 gap-5">
+              <select
+                type="number"
+                min="1"
+                max="5"
+                value={ratings}
+                onChange={(e) => setRatings(e.target.value)}
+                placeholder="your ratings"
+                className="border select border-amber-200"
+                register
+              >
+                <option>Select ratings</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              <textarea
+                cols="5"
+                rows="10"
+                placeholder="your comment"
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+                className="border border-amber-200"
+              ></textarea>
+            </div>
+            <div className="modal-action">
+              {/* if there is a button in form, it will close the modal */}
+              <button
+                onClick={handleReview}
+                className="btn text-white bg-pink-500"
+              >
+                Reviews
+              </button>
+              <button
+                onClick={handleReviewCloseModal}
+                type="button"
+                className="btn text-white bg-blue-500 ml-2"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </dialog>
       </div>

@@ -19,13 +19,13 @@ const SuccessStories = () => {
     },
   ];
   return (
-    <section className="py-20 bg-gray-50">
+    <section className=" py-20 bg-linear-to-r from-[#8ecf35] to-[#23cc88]">
       <h2 className="text-3xl font-bold text-center mb-10">Success Stories</h2>
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 px-6">
+      <div className="max-w-6xl  mx-auto grid md:grid-cols-3 gap-6 px-6">
         {stories.map((s, i) => (
           <motion.div
             key={i}
-            className="bg-white p-6 rounded-2xl shadow"
+            className="bg-[#eafaf8] p-6 rounded-2xl shadow"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
           >

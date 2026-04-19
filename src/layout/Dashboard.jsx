@@ -2,9 +2,9 @@ import { Link, NavLink, Outlet } from "react-router";
 import useAuth from "../useHook/useAuth";
 import { GoPerson, GoPersonFill } from "react-icons/go";
 import { FaCalendarPlus, FaClipboardCheck, FaFileAlt, FaStar, FaTasks, FaUsers } from "react-icons/fa";
-import { PlusCircle, Users } from "lucide-react";
+import { RiUserStarFill } from "react-icons/ri"
+import { PlusCircle, Users, UserStar } from "lucide-react";
 const DashboardLayout = () => {
-  const { role } = useAuth();
 
   return (
     <div className="drawer lg:drawer-open">
@@ -174,7 +174,7 @@ const DashboardLayout = () => {
             <li>
               <Link to="/dashboard/Manage-applied-applications">
                 <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex"
                   data-tip="ManageAppliedApplications"
                 >
                   {/* Home icon */}
@@ -190,7 +190,7 @@ const DashboardLayout = () => {
                   >
                     <FaClipboardCheck></FaClipboardCheck>
                   </svg>
-                  <span className="is-drawer-close:hidden ml-2">Manage Applied Applications</span>
+                  <span className="is-drawer-close:hidden ml-5">Manage Applied <br /> Applications</span>
                 </button>
               </Link>
             </li>
@@ -212,9 +212,33 @@ const DashboardLayout = () => {
                     stroke="currentColor"
                     className="my-1.5 inline-block size-6"
                   >
-                    <FaStar></FaStar>
+                    <FaStar ></FaStar>
                   </svg>
                   <span className="is-drawer-close:hidden ml-5">All Reviews</span>
+                </button>
+              </Link>
+            </li>
+            {/* my reviews */}
+            <li>
+              <Link to="/dashboard/my-reviews">
+                <button
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex"
+                  data-tip="My-Reviews"
+                >
+                  {/* Home icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                    className="my-1.5 inline-block size-0"
+                  >
+                  </svg>
+                  <RiUserStarFill></RiUserStarFill>
+                  <span className="is-drawer-close:hidden ml-6">My Reviews</span>
                 </button>
               </Link>
             </li>

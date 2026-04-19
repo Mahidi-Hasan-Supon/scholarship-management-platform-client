@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 import SocialLinks from "../../compunents/SocialLinks/SocialLinks";
 import axios from "axios";
 import { saveOrUploadUser } from "../../utils";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,10 +18,11 @@ const Register = () => {
   } = useForm();
   const handleRegister = (data) => {
     const profileImg = data.photo[0];
-    console.log(profileImg);
+    // console.log(profileImg);
     createUserWithEmailAndPasswordFunc(data.email, data.password)
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
+        navigate(location?.state || "/");
         const fromData = new FormData();
         fromData.append("image", profileImg);
         const image_url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key}`;
@@ -34,19 +36,26 @@ const Register = () => {
           };
           updateProfileFunc(userProfile)
             .then(async () => {
-              console.log("profile picture done");
+              // console.log("profile picture done");
               await saveOrUploadUser({
-                  name:data.name,
-                  email:data.email,
-                  photo:photoUrl,
-              })
+                name: data.name,
+                email: data.email,
+                photo: photoUrl,
+              });
               navigate(location?.state || "/");
             })
-            .catch((error) => console.log(error));
+            .catch(
+              (error) =>
+                // toast.error(error)
+                toast.error(error.message),
+              //  console.log(error)
+            );
         });
       })
       .catch((err) => {
-        console.log(err);
+        // toast.error(err);
+        toast.error(err.message);
+        // console.log(err);
       });
   };
   return (

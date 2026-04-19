@@ -1,17 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+
 import { useNavigate, useParams } from "react-router";
 import Loading from "../../compunents/Loading/Loading";
 import useAuth from "../../useHook/useAuth";
-import { number } from "framer-motion";
+
 import useAxiosSecure from "../../useHook/useAxiosSecure";
-import { toast } from "react-toastify";
 
 const CardDetails = () => {
   const { user } = useAuth();
-  const [review, setReview] = useState("");
-  const [ratings, setRatings] = useState(0);
   const { id } = useParams();
   const navigate = useNavigate();
   // const [scholarship, setScholarship] = useState({});
@@ -31,10 +28,12 @@ const CardDetails = () => {
   });
   // console.log(scholarship);
   // reviews get api
-  const { data: reviews = [], refetch: reviewRefetch } = useQuery({
-    queryKey: ["reviews", scholarship._id],
+  const { data: reviews = [] } = useQuery({
+    queryKey: ["reviews", scholarship?._id],
+    enabled: !!scholarship?._id,
     queryFn: async () => {
-      const result = await axiosSecure(`/reviews/${_id}`);
+      const result = await axiosSecure(`/reviews/${scholarship?._id}`);
+
       return result.data;
     },
   });
@@ -91,29 +90,9 @@ const CardDetails = () => {
       `${import.meta.env.VITE_SERVER_SITE}/create-checkout-session`,
       paymentInfo,
     );
-    console.log(data.url);
+    // console.log(data.url);
     window.location.href = data.url;
     // console.log(data.url);
-  };
-  const handleReviews = async () => {
-    const alreadyReviewed = reviews.find((r) => r.userEmail === user?.email);
-    if (alreadyReviewed) {
-      return toast.error("Already submitted");
-    }
-    const reviewData = {
-      scholarshipId: _id,
-      universityName,
-      userName: user?.displayName,
-      userEmail: user?.email,
-      userImage: user?.photoURL,
-      review,
-      ratings,
-      reviewDate: new Date(),
-    };
-    await axiosSecure.post(`/reviews`, reviewData);
-    console.log(reviewData);
-    toast.success("Reviews added");
-    reviewRefetch();
   };
 
   return (
@@ -196,75 +175,50 @@ const CardDetails = () => {
         </div>
 
         {/* Reviews Section */}
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 my-10">
           {/* Add Review Section */}
-          <div className="flex-2 bg-white shadow-lg rounded-2xl p-6 border">
-            <h3 className="text-2xl font-bold mb-4 text-primary">Add Review</h3>
-
-            <div className="flex flex-col gap-4">
-              <input
-                type="number"
-                min="1"
-                max="5"
-                value={ratings}
-                placeholder="Rating (1-5)"
-                className="input input-bordered w-full"
-                onChange={(e) => setRatings(e.target.value)}
-              />
-
-              <textarea
-                placeholder="Write your review"
-                value={review}
-                onChange={(e) => setReview(e.target.value)}
-                className="textarea textarea-bordered w-full"
-                rows={4}
-              ></textarea>
-
-              <button
-                className="btn bg-primary text-white hover:bg-primary/90"
-                onClick={handleReviews}
-              >
-                {/* {alreadyReviewed ? 'alreadyReviewed' : "Submit Review"} */}
-                Submit Review
-              </button>
-            </div>
-          </div>
 
           {/* All Reviews Section */}
-          <div className="flex-1 bg-white shadow-lg rounded-2xl p-6 border">
-            <h2 className="text-2xl font-bold mb-4">All Reviews</h2>
+          {reviews.length === 0 ? (
+            <p className="text-blue-500 font-serif font-semibold text-2xl text-center pt-15 ">
+              No reviews yet
+            </p>
+          ) : (
+            <div className="max-w-6xl mx-auto pt-20">
+            <div className=" bg-white shadow-lg rounded-2xl p-6 border">
+              <h2 className="text-2xl font-bold mb-4 text-center ">All Reviews</h2>
 
-            <div className="flex flex-col gap-5 max-h-[400px] overflow-y-auto pr-2">
-              {reviews.map((review, index) => (
-                <div
-                  key={index}
-                  className="flex gap-4 items-start border-b pb-4"
-                >
-                  <img
-                    src={review.userImage}
-                    alt=""
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
+              <div className=" gap-5 max-h-[400px] flex justify-center items-center overflow-y-auto pr-2">
+                {reviews.map((review, index) => (
+                  <div
+                    key={index}
+                    className="flex gap-4 items-start border-b pb-4"
+                  >
+                    <img
+                      src={review.userImage}
+                      alt=""
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
 
-                  <div className="flex-1">
-                    <h4 className="font-semibold">{review.userName}</h4>
-                    <h4 className="font-semibold">{review.userEmail}</h4>
-                    <p className="text-sm text-gray-500">
-                      {new Date(review.reviewDate).toLocaleDateString()}
-                      {/* {review.reviewDate} */}
-                    </p>
+                    <div className="flex-1">
+                      <h4 className="font-semibold">{review.userName}</h4>
+                      <h4 className="font-semibold">{review.userEmail}</h4>
+                      <p className="text-sm text-gray-500">
+                        {new Date(review.reviewDate).toLocaleDateString()}
+                        {/* {review.reviewDate} */}
+                      </p>
 
-                    <p className="text-yellow-500 font-medium">
-                      ⭐ {review.ratings}
-                    </p>
+                      <p className="text-yellow-500 font-medium">
+                        ⭐ {review.ratings}
+                      </p>
 
-                    <p className="text-gray-700 mt-1">{review.review}</p>
+                      <p className="text-gray-700 mt-1">{review.review}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
         </div>
+          )}
       </div>
     </div>
   );

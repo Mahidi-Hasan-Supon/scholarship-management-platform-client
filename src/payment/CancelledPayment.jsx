@@ -31,7 +31,7 @@ const CancelledPayment = () => {
       scholarshipId,
     })
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
           setPaymentData(res.data);
         });
    }

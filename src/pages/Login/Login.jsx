@@ -16,7 +16,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const handleLogin = (data) => {
-    console.log(data);
+    // console.log(data);
     signInWithEmailAndPasswordFunc(data.email, data.password)
       .then(async (res) => {
         console.log(res.user);
@@ -29,8 +29,9 @@ const Login = () => {
         navigate(location.state?location?.state : '/')
       })
       .catch((err) => {
-        console.log(err);
-        toast.err('Error')
+        // console.log(err);
+        // toast.error('Error')
+         toast.error(err.message)
       });
   };
   return (

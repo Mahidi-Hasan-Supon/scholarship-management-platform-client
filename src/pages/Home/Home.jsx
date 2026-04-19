@@ -7,7 +7,7 @@ import FAQ from "./FAQ/FAQ";
 
 const Home = () => {
   return (
-    <div>
+    <div className="">
     <div className="py-10">
         <Banner></Banner>
     </div>

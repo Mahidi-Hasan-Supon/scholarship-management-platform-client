@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../useHook/useAuth";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, signOutFunc } = useAuth();
@@ -8,16 +9,18 @@ const Navbar = () => {
   const handleSignOut = () => {
     signOutFunc()
       .then(() => {
-        console.log("signout");
+        // console.log("signout");
+        toast.success('signout')
       })
       .catch((err) => {
         console.log(err);
+        toast.error(err);
       });
   };
   const links = (
     <>
       <div className="flex">
-        <li>
+        <li className="text-[#007ea8]">
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
@@ -27,7 +30,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar  bg-linear-to-r from-[#8ecf35] to-[#23cc88] shadow-sm">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -71,7 +74,7 @@ const Navbar = () => {
             />
             <ul
               tabIndex="-1"
-              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+              className="dropdown-content menu bg-[#eafaf8] rounded-box z-1 w-52 p-2 shadow-sm"
             >
               <li>
                 <Link to='/dashboard'>Dashboard</Link>

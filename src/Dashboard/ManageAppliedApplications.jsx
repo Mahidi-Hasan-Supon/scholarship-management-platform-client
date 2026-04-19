@@ -217,12 +217,12 @@ const ManageAppliedApplications = () => {
                 {selectedApplication?.amount}
               </span>
             </p>
-            <p>
+            <p className="flex items-center">
               Feedback:{" "}
-              <span className="font-serif">
+              <span className="font-serif ml-2 text-blue-600 font-semibold">
                 {" "}
                 {/* {application?.amount} */}
-                {selectedApplication?.feedback}
+                {selectedApplication?.feedback || <p>pending</p>}
               </span>
             </p>
             <div className="modal-action">

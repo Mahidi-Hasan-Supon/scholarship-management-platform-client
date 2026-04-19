@@ -31,11 +31,15 @@ import MyApplications from "./Dashboard/MyApplications.jsx";
 import ManageScholarship from "./Dashboard/ManageScholarship.jsx";
 import ManageAppliedApplications from "./Dashboard/ManageAppliedApplications.jsx";
 import AllReviews from "./Dashboard/AllReviews.jsx";
+import MyReviews from "./Dashboard/MyReviews.jsx";
+import ErrorPage from "./compunents/ErrorPage/ErrorPage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    hydrateFallbackElement:<Loading></Loading>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -66,7 +70,7 @@ const router = createBrowserRouter([
         path: "/login",
         Component: Login,
       },
-    ],
+    ]
   },
   {
     path: "/dashboard",
@@ -95,6 +99,10 @@ const router = createBrowserRouter([
       {
         path: "all-reviews",
         element: <AllReviews></AllReviews>,
+      },
+      {
+        path: "my-reviews",
+        element: <MyReviews></MyReviews>,
       },
       {
         path: "profile",

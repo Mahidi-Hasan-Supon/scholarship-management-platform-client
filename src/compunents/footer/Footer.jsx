@@ -2,8 +2,9 @@ import React from "react";
 import scholarship from "../../assets/SCHL_Logo_FULL_White.svg";
 const Footer = () => {
   return (
-    <div className="mt-10">
-      <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
+    <div className="pt-10">
+      <div>
+      <footer className="footer footer-horizontal footer-center bg-linear-to-r from-[#8ecf35] to-[#23cc88] text-base-content rounded p-10">
         <img
           src={scholarship}
           alt=""
@@ -56,6 +57,7 @@ const Footer = () => {
           </p>
         </aside>
       </footer>
+    </div>
     </div>
   );
 };
