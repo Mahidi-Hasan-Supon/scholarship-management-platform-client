@@ -43,7 +43,7 @@ const SortSlider = () => {
           clickable: true,
         }}
         modules={[Pagination , Autoplay]}
-        className="mySwiper"
+        className="mySwiper bg-linear-to-r from-[#8ecf35] to-[#23cc88]"
       >
         {
             sortSlider.map(sort=>

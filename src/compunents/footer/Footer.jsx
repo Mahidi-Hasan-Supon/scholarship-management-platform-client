@@ -2,13 +2,13 @@ import React from "react";
 import scholarship from "../../assets/SCHL_Logo_FULL_White.svg";
 const Footer = () => {
   return (
-    <div className="pt-10">
+    <div className="pt-10 bg-linear-to-r from-[#8ecf35] to-[#23cc88]">
       <div>
-      <footer className="footer footer-horizontal footer-center bg-linear-to-r from-[#8ecf35] to-[#23cc88] text-base-content rounded p-10">
+      <footer className="footer footer-horizontal footer-center  text-base-content rounded p-10">
         <img
           src={scholarship}
           alt=""
-          className="text-black bg-blue-600/70  w-[200px] h-[100px]"
+          className="text-black bg-linear-to-r from-[#8ecf35] to-[#23cc88]  w-[200px] h-[100px]"
         />
 
         <nav className="grid grid-flow-col gap-4">

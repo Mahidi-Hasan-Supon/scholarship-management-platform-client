@@ -16,7 +16,7 @@ const Profile = () => {
             <h3 className="text-center ">Profile</h3>
         </div>
     </div> */}
-      <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+      <div className="flex justify-center items-center min-h-screen bg-[#23BE0A20] p-4">
         <div className="bg-green-400 shadow-xl rounded-2xl p-6 w-full max-w-lg">
           {/* Profile Image */}
           <div className="flex flex-col items-center">

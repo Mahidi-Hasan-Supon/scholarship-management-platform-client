@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../useHook/useAuth";
 import { toast } from "react-toastify";
+import { Underline } from "lucide-react";
 
 const Navbar = () => {
   const { user, signOutFunc } = useAuth();
@@ -10,7 +11,7 @@ const Navbar = () => {
     signOutFunc()
       .then(() => {
         // console.log("signout");
-        toast.success('signout')
+        toast.success("signout");
       })
       .catch((err) => {
         console.log(err);
@@ -20,11 +21,25 @@ const Navbar = () => {
   const links = (
     <>
       <div className="flex">
-        <li className="text-[#007ea8]">
-          <NavLink to="/">Home</NavLink>
+        <li className="">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "text-blue-600 underline" : ""
+            }
+            to="/"
+          >
+            Home
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/allScholarship">All Scholarships</NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "text-blue-600 underline" : ""
+            }
+            to="/allScholarship"
+          >
+            All Scholarships
+          </NavLink>
         </li>
       </div>
     </>
@@ -57,7 +72,9 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-blue-600 text-xl font-serif">Scholarship</a>
+        <a className=" text-blue-600 text-xl font-serif">
+          Scholarship
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
@@ -74,15 +91,15 @@ const Navbar = () => {
             />
             <ul
               tabIndex="-1"
-              className="dropdown-content menu bg-[#eafaf8] rounded-box z-1 w-52 p-2 shadow-sm"
+              className="dropdown-content menu bg-linear-to-r from-[#8ecf35] to-[#23cc88] rounded-box z-1 w-52 p-2 shadow-sm"
             >
               <li>
-                <Link to='/dashboard'>Dashboard</Link>
+                <Link to="/dashboard" className="hover:bg-primary hover:text-amber-50">Dashboard</Link>
               </li>
-            
-           <button onClick={handleSignOut} className="btn btn-secondary">
-           SignOut
-          </button >
+
+              <button onClick={handleSignOut} className="btn btn-secondary mt-1">
+                SignOut
+              </button>
             </ul>
           </div>
         ) : (

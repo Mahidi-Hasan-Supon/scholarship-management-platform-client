@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { MdCategory } from "react-icons/md";
 import { Link } from "react-router";
+import 'animate.css';
 
 const Card = ({ scholarship }) => {
   const {
@@ -15,8 +16,8 @@ const Card = ({ scholarship }) => {
   } = scholarship;
 
   return (
-    <div>
-      <div className="card bg-[#eafaf8] w-96 shadow-sm">
+    <div className="">
+      <div className="card bg-linear-to-r from-[#8ecf35] to-[#23cc88]  w-96 mx-auto  shadow-sm animate__animated animate__backInDown animate__duration-1000">
         <figure className="">
           <img
             src={universityImage}
@@ -38,7 +39,7 @@ const Card = ({ scholarship }) => {
           <div className="card-actions justify-center">
             <Link
               to={`/cardDetails/${scholarship._id}`}
-              className="btn btn-primary w-full"
+              className="btn bg-green-600 w-full"
             >
               View Details
             </Link>

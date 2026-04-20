@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../ScholarshipCard/Card";
+import Loading from "../../compunents/Loading/Loading";
 
 const AllScholarship = () => {
   const [scholarships, setScholarships] = useState([]);
@@ -21,18 +22,21 @@ const AllScholarship = () => {
       });
   }, [totalPage, totalCount, currentPage]);
   // console.log(scholarships);
+
   return (
     <div className="py-10">
       <h1 className="text-5xl font-bold md:text-center">All Scholarship</h1>
-      <div className="grid md:grid-cols-3 gap-4 pt-10">
+      <div className="grid md:grid-cols-3 gap-4 pt-10 ">
         {scholarships.map((scholarship) => (
-          <Card scholarship={scholarship} key={scholarship._id}></Card>
+          <div className="">
+            <Card scholarship={scholarship} key={scholarship._id}></Card>
+          </div>
         ))}
       </div>
       <div className="py-10 gap-5 items-center flex justify-center">
         {currentPage > 0 && (
           <button
-            className="btn btn-primary"
+            className="btn bg-green-400"
             onClick={() => setCurrentPage(currentPage - 1)}
           >
             pre
@@ -41,7 +45,7 @@ const AllScholarship = () => {
         {[...Array(totalPage).keys()].map((i) => (
           <button
             onClick={() => setCurrentPage(i)}
-            className={`btn ${i === currentPage && "btn-primary"}`}
+            className={`btn ${i === currentPage && "bg-green-400"}`}
             key={i}
           >
             {i}
@@ -49,7 +53,7 @@ const AllScholarship = () => {
         ))}
         {currentPage < totalPage - 1 && (
           <button
-            className="btn btn-primary"
+            className="btn bg-green-400"
             onClick={() => setCurrentPage(currentPage + 1)}
           >
             next

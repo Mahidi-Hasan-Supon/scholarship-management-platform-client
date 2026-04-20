@@ -117,7 +117,7 @@ createRoot(document.getElementById("root")).render(
   <div>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <RouterProvider router={router} />,
+        <RouterProvider router={router} />
         <ToastContainer
           position="top-right"
           autoClose={3000}

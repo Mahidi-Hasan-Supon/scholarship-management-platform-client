@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import Loading from "../../compunents/Loading/Loading";
 import useAuth from "../../useHook/useAuth";
-
+import 'animate.css'
 import useAxiosSecure from "../../useHook/useAxiosSecure";
 
 const CardDetails = () => {
@@ -97,8 +97,8 @@ const CardDetails = () => {
 
   return (
     <div className="py-10">
-      <div className="py-10 px-4">
-        <div className="max-w-5xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden">
+      <div className="py-10 px-4 animate__animated animate__bounce">
+        <div className="max-w-5xl mx-auto bg-linear-to-r from-[#8ecf35] to-[#23cc88] shadow-xl rounded-2xl overflow-hidden animate__animated animate__backInRight">
           {/* Image */}
           <img
             src={universityImage}
@@ -155,7 +155,7 @@ const CardDetails = () => {
             </div>
 
             {/* Total Cost */}
-            <div className="mt-4 p-4 bg-gray-100 rounded-xl">
+            <div className="mt-4 p-4 bg-green-600 rounded-xl">
               <p className="text-lg font-semibold">
                 Total Cost: $
                 {Number(applicationFees || 0) + Number(serviceCharge || 0)}
@@ -166,7 +166,7 @@ const CardDetails = () => {
             <div className="mt-6">
               <button
                 onClick={handlePayment}
-                className="btn btn-primary w-full text-lg"
+                className="btn bg-green-600 w-full text-lg"
               >
                 Apply for Scholarship 🚀
               </button>
@@ -175,17 +175,19 @@ const CardDetails = () => {
         </div>
 
         {/* Reviews Section */}
-          {/* Add Review Section */}
+        {/* Add Review Section */}
 
-          {/* All Reviews Section */}
-          {reviews.length === 0 ? (
-            <p className="text-blue-500 font-serif font-semibold text-2xl text-center pt-15 ">
-              No reviews yet
-            </p>
-          ) : (
-            <div className="max-w-6xl mx-auto pt-20">
-            <div className=" bg-white shadow-lg rounded-2xl p-6 border">
-              <h2 className="text-2xl font-bold mb-4 text-center ">All Reviews</h2>
+        {/* All Reviews Section */}
+        {reviews.length === 0 ? (
+          <p className="text-blue-500 font-serif font-semibold text-2xl text-center pt-15 ">
+            No reviews yet
+          </p>
+        ) : (
+          <div className="max-w-6xl mx-auto pt-20 animate__animated animate__backInRight">
+            <div className="bg-linear-to-r from-[#8ecf35] to-[#23cc88] shadow-lg rounded-2xl p-6">
+              <h2 className="text-2xl font-bold mb-4 text-center ">
+                All Reviews
+              </h2>
 
               <div className=" gap-5 max-h-[400px] flex justify-center items-center overflow-y-auto pr-2">
                 {reviews.map((review, index) => (
@@ -217,8 +219,8 @@ const CardDetails = () => {
                 ))}
               </div>
             </div>
-        </div>
-          )}
+          </div>
+        )}
       </div>
     </div>
   );
