@@ -21,7 +21,7 @@ const Testimonails = () => {
         {testimonials.map((t, i) => (
           <div
             key={i}
-            className="bg-linear-to-r from-[#8ecf35] to-[#23cc88] p-6 rounded-xl animate__animated animate__zoomInDown"
+            className="bg-linear-to-r from-[#8ecf35] to-[#23cc88] p-6 rounded-xl animate__animated animate__zoomInDown hover:shadow-2xl hover:underline"
           >
             <p className="italic">“{t.comment}”</p>
             <div className="mt-2 flex justify-between">

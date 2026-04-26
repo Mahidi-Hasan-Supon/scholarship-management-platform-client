@@ -11,10 +11,16 @@ import {
 } from "react-icons/fa";
 import { RiUserStarFill } from "react-icons/ri";
 import { PlusCircle, Users, UserStar } from "lucide-react";
+import useRole from "../useHook/useRole";
 const DashboardLayout = () => {
+  const [role] = useRole();
   return (
     <div className="drawer lg:drawer-open bg-[#23BE0A60]">
-      <input id="my-drawer-4" type="checkbox" className="drawer-toggle bg-[#23BE0A60]" />
+      <input
+        id="my-drawer-4"
+        type="checkbox"
+        className="drawer-toggle bg-[#23BE0A60]"
+      />
       <div className="drawer-content">
         {/* Navbar */}
         <nav className="navbar w-full bg-amber-400/20">
@@ -40,17 +46,26 @@ const DashboardLayout = () => {
             </svg>
           </label>
           <div className="px-4 ">Dashboard</div>
+          <div>
+          </div>
         </nav>
         {/* Page content here */}
+        {/* dashboard route ta design */}
+        <div className="flex justify-center items-center">
+          This is dashboard page you can click sidebar menu and see this page
+        </div>
         <Outlet></Outlet>
       </div>
 
-      <div className="drawer-side is-drawer-close:overflow-visible bg-[#23BE0A60]">
+      <div className="drawer-side mt-15 md:mt-0 is-drawer-close:overflow-visible bg-[#23BE0A60]">
         <label
           htmlFor="my-drawer-4"
           aria-label="close sidebar"
           className="drawer-overlay "
         ></label>
+        <div>
+
+        </div>
         <div className="flex min-h-full flex-col items-start  is-drawer-close:w-14 is-drawer-open:w-64 ">
           {/* Sidebar content here */}
           <ul className="menu w-full  grow">
@@ -80,33 +95,35 @@ const DashboardLayout = () => {
               </Link>
             </li>
             {/* Add scholarship */}
-            <li>
-              <Link to="/dashboard/add-scholarship">
-                <button
-                  className="is-drawer-close:tooltip  is-drawer-close:tooltip-right"
-                  data-tip="Add-Scholarship"
-                >
-                  {/* Home icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                    className="my-1.5 inline-block size-6"
+            {role === "admin" && (
+              <li>
+                <Link to="/dashboard/add-scholarship">
+                  <button
+                    className="is-drawer-close:tooltip  is-drawer-close:tooltip-right"
+                    data-tip="Add-Scholarship"
                   >
-                    <FaCalendarPlus></FaCalendarPlus>
-                    {/* <PlusCircle></PlusCircle> */}
-                  </svg>
-                  <span className="is-drawer-close:hidden ml-5">
-                    {" "}
-                    Add Scholarship
-                  </span>
-                </button>
-              </Link>
-            </li>
+                    {/* Home icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2"
+                      fill="none"
+                      stroke="currentColor"
+                      className="my-1.5 inline-block size-6"
+                    >
+                      <FaCalendarPlus></FaCalendarPlus>
+                      {/* <PlusCircle></PlusCircle> */}
+                    </svg>
+                    <span className="is-drawer-close:hidden ml-5">
+                      {" "}
+                      Add Scholarship
+                    </span>
+                  </button>
+                </Link>
+              </li>
+            )}
             {/* ManageUsers */}
             <li>
               <Link to="/dashboard/manage-users">

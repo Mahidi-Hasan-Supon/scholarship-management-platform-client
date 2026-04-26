@@ -1,8 +1,8 @@
 import React from "react";
-import 'animate.css'
+import "animate.css";
 const FAQ = () => {
   const faqs = [
-    { q: "How to apply?", a: "Browse scholarships and click apply." },
+    { q: "How to apply?", a: "Browse view details and click apply." },
     { q: "Is login required?", a: "Yes, login is required to apply." },
     { q: "Is payment refundable?", a: "No, payment is non-refundable." },
   ];
@@ -16,7 +16,7 @@ const FAQ = () => {
         {faqs.map((f, i) => (
           <div
             key={i}
-            className="bg-linear-to-r from-[#8ecf35] to-[#23cc88] rounded-xl p-4 animate__animated animate__bounceIn"
+            className="bg-linear-to-r from-[#8ecf35] to-[#23cc88] rounded-xl p-4 animate__animated    animate__bounceIn hover:shadow-2xl hover:underline"
           >
             <h4 className="font-semibold">{f.q}</h4>
             <p className="text-gray-600 mt-1">{f.a}</p>

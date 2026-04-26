@@ -4,6 +4,7 @@ import SortSlider from "./sortSlider/SortSlider";
 import SuccessStories from "./successStories/SuccessStories";
 import Testimonails from "./testimonials/Testimonails";
 import FAQ from "./FAQ/FAQ";
+import TopScholarship from "../../compunents/TopScolarhip/topScholarship";
 
 const Home = () => {
   return (
@@ -13,6 +14,9 @@ const Home = () => {
     </div>
       <div className="py-10">
         <SortSlider></SortSlider>
+      </div>
+      <div className="py-10">
+        <TopScholarship></TopScholarship>
       </div>
       <div>
         <SuccessStories></SuccessStories>

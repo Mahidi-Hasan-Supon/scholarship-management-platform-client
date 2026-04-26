@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { MdCategory } from "react-icons/md";
 import { Link } from "react-router";
-import 'animate.css';
+import "animate.css";
 
 const Card = ({ scholarship }) => {
   const {

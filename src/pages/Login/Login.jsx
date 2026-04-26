@@ -19,7 +19,7 @@ const Login = () => {
     // console.log(data);
     signInWithEmailAndPasswordFunc(data.email, data.password)
       .then(async (res) => {
-        console.log(res.user);
+        // console.log(res.user);
         await saveOrUploadUser({
           name:res.user?.name,
           email:res.user?.email,

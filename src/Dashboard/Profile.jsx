@@ -1,14 +1,66 @@
-import React from "react";
+import React, { useRef } from "react";
 import useAuth from "../useHook/useAuth";
 import useRole from "../useHook/useRole";
 import Loading from "../compunents/Loading/Loading";
+import { imageUpload } from "../utils";
+import useAxiosSecure from "../useHook/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Profile = () => {
-  const { user } = useAuth();
+  const editProfileModalRef = useRef();
+  const { user , updateProfileFunc} = useAuth();
+  const axiosSecure = useAxiosSecure();
   const [role, isRoleLoading] = useRole();
-  console.log(role, isRoleLoading);
+  const { data: profile = [], isLoading  , refetch} = useQuery({
+    queryKey: ["profile", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure(`/profile`);
+      return res.data;
+    },
+  });
+  console.log(profile);
+  if(isLoading) return <Loading></Loading>
   if (isRoleLoading) return <Loading></Loading>;
+  // console.log(role, isRoleLoading);
   if (!role) return <p>Role is no found</p>;
+  // edit modal
+  const handleEditModal = () => {
+    editProfileModalRef.current.showModal();
+  };
+  const handleEditCloseModal = () => {
+    editProfileModalRef.current.close();
+  };
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const from = e.target;
+    const name = from.name.value;
+    const imageFile =from.photo.files[0];
+    console.log(imageFile);
+    let imageUrl = profile?.photoURL;
+    if(imageFile){
+      imageUrl = await imageUpload(imageFile)
+    }
+    try{
+    await  updateProfileFunc({
+      displayName : name ,
+      photoURL : imageUrl
+      })
+      const res = await axiosSecure.patch(`/update-profile`, {
+        name,
+        photo:imageUrl,
+      });
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        // user.displayName = name,
+        // user.photoURL = image
+        refetch()
+        handleEditCloseModal();
+      }
+    
+    }catch(err){
+      console.log(err);
+    }
+  };
   return (
     <div>
       {/* <div className="border border-amber-200 h-[500px] w-[400px] md:w-[800px] mx-auto mt-10 rounded-3xl">
@@ -38,7 +90,7 @@ const Profile = () => {
 
             <div className="flex justify-between">
               <span className="text-black">Role:</span>
-              <span className="font-medium">{role?.role}</span>
+              <span className="font-medium">{role}</span>
             </div>
 
             {/* <div className="flex justify-between">
@@ -49,10 +101,50 @@ const Profile = () => {
 
           {/* Button */}
           <div className="mt-6">
-            <button className="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded-lg">
+            <button
+              onClick={handleEditModal}
+              className="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded-lg"
+            >
               Edit Profile
             </button>
           </div>
+          {/* Open the modal using document.getElementById('ID').showModal() method */}
+          <dialog ref={editProfileModalRef} className="modal">
+            <div className="modal-box">
+              <h3 className="font-bold text-lg">Profile Update!</h3>
+              <div>
+                <form onSubmit={handleUpdate}>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="e.g:name"
+                    className="input"
+                    defaultValue={user?.name}
+                  />
+                  <input
+                    type="file"
+                    name="photo"
+                    className="input my-2"
+                  />
+
+                  <div className="mt-3 flex justify-between">
+                    <button type="submit" className="btn">
+                      Update Profile
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleEditCloseModal}
+                      className="btn"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              {/* if there is a button in form, it will close the modal */}
+            </div>
+          </dialog>
         </div>
       </div>
     </div>

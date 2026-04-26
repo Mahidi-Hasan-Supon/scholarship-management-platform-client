@@ -33,13 +33,15 @@ import ManageAppliedApplications from "./Dashboard/ManageAppliedApplications.jsx
 import AllReviews from "./Dashboard/AllReviews.jsx";
 import MyReviews from "./Dashboard/MyReviews.jsx";
 import ErrorPage from "./compunents/ErrorPage/ErrorPage.jsx";
+import PrivateRoute from "./routes/PrivateRoute.jsx";
+import AdminRoutes from "./routes/AdminRoutes.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
-    hydrateFallbackElement:<Loading></Loading>,
-    errorElement:<ErrorPage></ErrorPage>,
+    hydrateFallbackElement: <Loading></Loading>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -56,7 +58,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/success-payment",
-        Component: SuccessPayment,
+        // Component: SuccessPayment,
+        element:<PrivateRoute>
+          <SuccessPayment></SuccessPayment>
+        </PrivateRoute>
       },
       {
         path: "/canceled-payment",
@@ -70,15 +75,15 @@ const router = createBrowserRouter([
         path: "/login",
         Component: Login,
       },
-    ]
+    ],
   },
   {
     path: "/dashboard",
-    Component: Dashboard,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       {
         path: "add-scholarship",
-        element: <AddScholarship></AddScholarship>,
+        element: <PrivateRoute><AddScholarship></AddScholarship></PrivateRoute> ,
       },
       {
         path: "manage-users",
@@ -94,7 +99,13 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-applied-applications",
-        element: <ManageAppliedApplications></ManageAppliedApplications>,
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <ManageAppliedApplications></ManageAppliedApplications>
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
       },
       {
         path: "all-reviews",
@@ -106,7 +117,9 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <Profile></Profile>,
+        element: <PrivateRoute>
+          <Profile></Profile>
+        </PrivateRoute>,
       },
     ],
   },

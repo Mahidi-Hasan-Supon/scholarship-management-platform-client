@@ -104,8 +104,8 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <div className="gap-2">
-              <Link to="/register" className="btn">
+            <div className="gap-2 flex ml-2">
+              <Link to="/register" className="btn ml-2">
                 Register
               </Link>
               <Link to="/login" className="btn mx-2">
