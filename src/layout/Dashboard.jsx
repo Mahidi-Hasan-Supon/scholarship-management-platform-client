@@ -15,7 +15,7 @@ import useRole from "../useHook/useRole";
 const DashboardLayout = () => {
   const [role] = useRole();
   return (
-    <div className="drawer lg:drawer-open bg-[#23BE0A60]">
+    <div className="drawer lg:drawer-open min-h-screen bg-[#23BE0A60]">
       <input
         id="my-drawer-4"
         type="checkbox"
@@ -46,25 +46,24 @@ const DashboardLayout = () => {
             </svg>
           </label>
           <div className="px-4 ">Dashboard</div>
-          <div>
-          </div>
+          <div></div>
         </nav>
         {/* Page content here */}
         {/* dashboard route ta design */}
-        <div className="flex justify-center items-center">
+        {/* <div className="flex justify-center items-center  pt-60 pb-80">
           This is dashboard page you can click sidebar menu and see this page
-        </div>
+        </div> */}
         <Outlet></Outlet>
       </div>
 
-      <div className="drawer-side mt-15 md:mt-0 is-drawer-close:overflow-visible bg-[#23BE0A60]">
-        <label
-          htmlFor="my-drawer-4"
-          aria-label="close sidebar"
-          className="drawer-overlay "
-        ></label>
-        <div>
-
+      <div className="drawer-side mt-15 md:mt-0 is-drawer-close:overflow-visible bg-[#23BE0A]">
+        <div className="bg-[#23BE0A]">
+          <label
+            htmlFor="my-drawer-4"
+            aria-label="close sidebar"
+            className="drawer-overlay "
+          ></label>
+          <div></div>
         </div>
         <div className="flex min-h-full flex-col items-start  is-drawer-close:w-14 is-drawer-open:w-64 ">
           {/* Sidebar content here */}
@@ -125,137 +124,150 @@ const DashboardLayout = () => {
               </li>
             )}
             {/* ManageUsers */}
-            <li>
-              <Link to="/dashboard/manage-users">
-                <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Manage-Users"
-                >
-                  {/* Home icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                    className="my-1.5 inline-block size-6"
+            {role === "admin" && (
+              <li>
+                <Link to="/dashboard/manage-users">
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Manage-Users"
                   >
-                    <FaUsers></FaUsers>
-                  </svg>
-                  <span className="is-drawer-close:hidden ml-5">
-                    Manage Users
-                  </span>
-                </button>
-              </Link>
-            </li>
-            {/* my application */}
-            <li>
-              <Link to="/dashboard/my-applications">
-                <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My-Applications"
-                >
-                  {/* Home icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                    className="my-1.5 inline-block size-6"
+                    {/* Home icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2"
+                      fill="none"
+                      stroke="currentColor"
+                      className="my-1.5 inline-block size-6"
+                    >
+                      <FaUsers></FaUsers>
+                    </svg>
+                    <span className="is-drawer-close:hidden ml-5">
+                      Manage Users
+                    </span>
+                  </button>
+                </Link>
+              </li>
+            )}
+
+            {/* manage scholarship */}
+            {role === "admin" && (
+              <li>
+                <Link to="/dashboard/manage-scholarship">
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Manage-Scholarship"
                   >
-                    <FaFileAlt></FaFileAlt>
-                  </svg>
-                  <span className="is-drawer-close:hidden ml-5">
-                    My Applications
-                  </span>
-                </button>
-              </Link>
-            </li>
-            {/* manage application */}
-            <li>
-              <Link to="/dashboard/manage-scholarship">
-                <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Manage-Scholarship"
-                >
-                  {/* Home icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                    className="my-1.5 inline-block size-6"
-                  >
-                    <FaTasks></FaTasks>
-                  </svg>
-                  <span className="is-drawer-close:hidden ml-5">
-                    Manage Scholarship
-                  </span>
-                </button>
-              </Link>
-            </li>
+                    {/* Home icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2"
+                      fill="none"
+                      stroke="currentColor"
+                      className="my-1.5 inline-block size-6"
+                    >
+                      <FaTasks></FaTasks>
+                    </svg>
+                    <span className="is-drawer-close:hidden ml-5">
+                      Manage Scholarship
+                    </span>
+                  </button>
+                </Link>
+              </li>
+            )}
             {/* manage applied application */}
-            <li>
-              <Link to="/dashboard/Manage-applied-applications">
-                <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex"
-                  data-tip="ManageAppliedApplications"
-                >
-                  {/* Home icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                    className="my-1.5 inline-block size-6"
+            {role === "moderator" && (
+              <li>
+                <Link to="/dashboard/Manage-applied-applications">
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex"
+                    data-tip="ManageAppliedApplications"
                   >
-                    <FaClipboardCheck></FaClipboardCheck>
-                  </svg>
-                  <span className="is-drawer-close:hidden ml-5">
-                    Manage Applied <br /> Applications
-                  </span>
-                </button>
-              </Link>
-            </li>
+                    {/* Home icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2"
+                      fill="none"
+                      stroke="currentColor"
+                      className="my-1.5 inline-block size-6"
+                    >
+                      <FaClipboardCheck></FaClipboardCheck>
+                    </svg>
+                    <span className="is-drawer-close:hidden ml-5">
+                      Manage Applied <br /> Applications
+                    </span>
+                  </button>
+                </Link>
+              </li>
+            )}
             {/* all reviews */}
-            <li>
-              <Link to="/dashboard/all-reviews">
-                <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="AllReviews"
-                >
-                  {/* Home icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                    className="my-1.5 inline-block size-6"
+            {role === "moderator" && (
+              <li>
+                <Link to="/dashboard/all-reviews">
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="AllReviews"
                   >
-                    <FaStar></FaStar>
-                  </svg>
-                  <span className="is-drawer-close:hidden ml-5">
-                    All Reviews
-                  </span>
-                </button>
-              </Link>
-            </li>
+                    {/* Home icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2"
+                      fill="none"
+                      stroke="currentColor"
+                      className="my-1.5 inline-block size-6"
+                    >
+                      <FaStar></FaStar>
+                    </svg>
+                    <span className="is-drawer-close:hidden ml-5">
+                      All Reviews
+                    </span>
+                  </button>
+                </Link>
+              </li>
+            )}
+            {/* my application */}
+            {role === "student" && (
+              <li>
+                <Link to="/dashboard/my-applications">
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="My-Applications"
+                  >
+                    {/* Home icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2"
+                      fill="none"
+                      stroke="currentColor"
+                      className="my-1.5 inline-block size-6"
+                    >
+                      <FaFileAlt></FaFileAlt>
+                    </svg>
+                    <span className="is-drawer-close:hidden ml-5">
+                      My Applications
+                    </span>
+                  </button>
+                </Link>
+              </li>
+            )}
             {/* my reviews */}
-            <li>
+            {
+              role === 'student' && (
+            <li className="bg-[#23BE0A60]">
               <Link to="/dashboard/my-reviews">
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex"
@@ -279,7 +291,11 @@ const DashboardLayout = () => {
                 </button>
               </Link>
             </li>
+              )
+            }
             {/* profile */}
+            {
+             ( role === 'admin' || role === 'student' || role === 'moderator') && (
             <li>
               <Link to="/dashboard/profile">
                 <button
@@ -303,6 +319,8 @@ const DashboardLayout = () => {
                 </button>
               </Link>
             </li>
+              )
+            }
 
             {/* setting item */}
             {/* <li className="my-20">

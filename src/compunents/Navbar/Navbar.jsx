@@ -72,9 +72,7 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className=" text-blue-600 text-xl font-serif">
-          Scholarship
-        </a>
+        <a className=" text-blue-600 text-xl font-serif">Scholarship</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
@@ -94,10 +92,18 @@ const Navbar = () => {
               className="dropdown-content menu bg-linear-to-r from-[#8ecf35] to-[#23cc88] rounded-box z-1 w-52 p-2 shadow-sm"
             >
               <li>
-                <Link to="/dashboard" className="hover:bg-primary hover:text-amber-50">Dashboard</Link>
+                <Link
+                  to="/dashboard"
+                  className="hover:bg-primary hover:text-amber-50"
+                >
+                  Dashboard
+                </Link>
               </li>
 
-              <button onClick={handleSignOut} className="btn btn-secondary mt-1">
+              <button
+                onClick={handleSignOut}
+                className="btn btn-secondary mt-1"
+              >
                 SignOut
               </button>
             </ul>

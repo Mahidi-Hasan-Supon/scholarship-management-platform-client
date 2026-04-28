@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cardDetails/:id",
-        Component: CardDetails,
+        element: <PrivateRoute><CardDetails></CardDetails></PrivateRoute> ,
       },
       {
         path: "/success-payment",
@@ -87,33 +87,31 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-users",
-        element: <ManageUsers></ManageUsers>,
+        element: <PrivateRoute><ManageUsers></ManageUsers></PrivateRoute> ,
       },
       {
         path: "my-applications",
-        element: <MyApplications></MyApplications>,
+        element:<PrivateRoute><MyApplications></MyApplications></PrivateRoute> ,
       },
       {
         path: "manage-scholarship",
-        element: <ManageScholarship></ManageScholarship>,
+        element:<PrivateRoute><ManageScholarship></ManageScholarship></PrivateRoute> ,
       },
       {
         path: "manage-applied-applications",
         element: (
           <PrivateRoute>
-            <AdminRoutes>
               <ManageAppliedApplications></ManageAppliedApplications>
-            </AdminRoutes>
           </PrivateRoute>
         ),
       },
       {
         path: "all-reviews",
-        element: <AllReviews></AllReviews>,
+        element: <PrivateRoute><AllReviews></AllReviews></PrivateRoute>,
       },
       {
         path: "my-reviews",
-        element: <MyReviews></MyReviews>,
+        element:<PrivateRoute><MyReviews></MyReviews></PrivateRoute> ,
       },
       {
         path: "profile",

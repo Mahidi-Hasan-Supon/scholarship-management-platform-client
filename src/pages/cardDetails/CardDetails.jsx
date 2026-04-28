@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import Loading from "../../compunents/Loading/Loading";
 import useAuth from "../../useHook/useAuth";
-import 'animate.css'
+import "animate.css";
 import useAxiosSecure from "../../useHook/useAxiosSecure";
 
 const CardDetails = () => {
@@ -20,8 +20,8 @@ const CardDetails = () => {
   } = useQuery({
     queryKey: ["scholarship", id],
     queryFn: async () => {
-      const result = await axios(
-        `${import.meta.env.VITE_SERVER_SITE}/scholarship/${id}`,
+      const result = await axiosSecure(
+        `/scholarship/${id}`,
       );
       return result.data;
     },

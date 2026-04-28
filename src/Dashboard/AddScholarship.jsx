@@ -5,11 +5,13 @@ import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import useAuth from "../useHook/useAuth";
 import { imageUpload } from "../utils";
+import useAxiosSecure from "../useHook/useAxiosSecure";
 
 const AddScholarship = () => {
   const { user, updateProfileFunc } = useAuth();
   const [selectedCountry, setSelectedCountry] = useState("");
   const { register, handleSubmit, reset } = useForm();
+  const axiosSecure = useAxiosSecure()
 
   // country and city
   const countryCityData = {
@@ -28,7 +30,7 @@ const AddScholarship = () => {
   } = useMutation({
     mutationFn: async (addScholarship) =>
       // 1st time axios use
-      await axios.post("http://localhost:5000/scholarship", addScholarship),
+      await axiosSecure.post(`/scholarship`, addScholarship),
     onSuccess: (data) => {
       console.log(data);
       // toast
